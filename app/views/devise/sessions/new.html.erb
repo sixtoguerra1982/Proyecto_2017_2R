@@ -1,0 +1,41 @@
+<sectionc class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-5">
+      <h2 class="display-4">Log in</h2>
+      <hr class="bg-info">
+      <p class="pb-0 mb-0">Ingresa a tu cuenta.</p>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row form-group">
+          <%= f.label :email, "e-mail:", class: "col-form-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.email_field :email, class: "form-control", autofocus: true %>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <%= f.label :password, "Password:", class: "col-form-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.password_field :password, class: "form-control", autocomplete: "off" %>
+          </div>
+        </div>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="form-group">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, "Recordar" %>
+          </div>
+        <% end -%>
+
+        <div class="d-flex flex-row justify-content-center">
+          <div class="actions">
+            <%= f.submit "Ingresar", class: "btn btn-outline-info" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="d-flex flex-row justify-content-left">
+        <p><%= render "devise/shared/links" %></p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+<%= form_with(model: menu, local: true) do |form| %>
+
+  <% if menu.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
+      <ul>
+      <% menu.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% unless @cook.first.nil? %>
+    <h3>Nombre de cocinero: <%= @cook.first.name %></h3>
+    <h3> Menus:</h3>
+    <ul>
+      <% @menus.each do |menu| %>
+        <li>
+          <%= menu.name %>
+        </li>
+      <% end %>
+    </ul>  
+
+    <div class="field">
+      <%= form.label :name, "Nombre del plato" %>
+      <%= form.text_field :name, id: :menu_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description, "Cuentanos detalles de tu Plato" %>
+      <%= form.text_area :description, id: :menu_description %>
+    </div>
+
+    <div class="field">
+      <%= form.label :picture, "Pudes poner su foto" %>
+      <%= form.file_field :picture, id: :menu_picture %>
+    </div>
+
+    <div class="field">
+      <%= form.label :price, "Precio del Plato" %>
+      <%= form.number_field :price, id: :menu_price %>
+    </div>
+
+    <div class="field">
+      <%= form.label :date, "Fecha de Venta" %>
+      <%= form.date_select :date, id: :menu_date %>
+    </div>
+    
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% else %>
+    <h1>NO ESTAS CREADO COMO COOKs</h1>
+  <% end %>
+<% end %>

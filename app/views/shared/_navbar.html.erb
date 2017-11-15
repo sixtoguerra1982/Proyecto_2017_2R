@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+  <a class="navbar-brand" href="<%= root_path %>">
+    <%= image_tag "logo-02.svg", with: "30", height: "30", class: "d-inline-block align-top" %>
+    La tía.cl!
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <div class="navbar-nav mr-auto ml-auto text-center">
+      <a class="nav-item nav-link active" href="#">Home</a>
+      <a class="nav-item nav-link" href="#">Nosotros</a>
+      <a class="nav-item nav-link" href="#">Servicio</a>
+      <a class="nav-item nav-link" href="#">Contacto</a>
+    </div>
+
+    <% if user_signed_in? %>
+
+    <div class="d-flex flex-row justify-content-center">
+        <a href="#" class="nav-item nav-link text-white">Bienvenido</a>
+    
+        <%= image_tag current_user.picture.thumb, class: "d-inline-block align-top avatar" %>
+
+
+        <div class="d-flex flex-row justify-content-center">
+        <a href="#" class="nav-item nav-link text-white"><%= current_user.name %></a>
+
+        <% if current_user.cook == true %>
+          <a class="nav-item nav-link text-white" href="<%= menus_path %>">Crea Tus Platos</a>
+        <% end %>
+        
+        <a href="<%= destroy_user_session_path %>" data-method="DELETE" class="btn btn-outline-primary text-white border-white mr-2">Salir</a>
+
+    </div>
+
+    <% else %>
+    <div class="d-flex flex-row justify-content-center">
+      <a href="<%= new_user_session_path %>" class="btn btn-outline-primary text-white border-white mr-2">Ingresar</a>
+      <a href="<%= new_user_registration_path %>" class="btn btn-outline-primary text-white border-white">Registrarse</a>
+    </div>
+    <% end %>
+  </div>
+</nav>
+<!-- Fin menú de navegación -->

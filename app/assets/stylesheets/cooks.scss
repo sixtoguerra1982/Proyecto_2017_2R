@@ -1,0 +1,37 @@
+// Place all the styles related to the cooks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.slider	{
+	background: url("02.jpg");
+	height: 100vh;
+	background-size: cover;
+	background-position: center;
+}
+
+.slider h1{
+	color: white;
+}
+/* Fin de Main */
+
+.bg-section-cards {
+	background: url("../images/02.jpg");
+	height: 100vh;
+	background-size: cover;
+	background-position: center;
+}
+
+.menus_list{
+	background-color: white;
+	text-align: center;
+	width: 500px;
+	height: 500px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+
+.cook{
+	max-width: 100%;
+}

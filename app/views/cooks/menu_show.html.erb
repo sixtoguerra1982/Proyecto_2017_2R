@@ -1,0 +1,46 @@
+<!-- menú de navegación -->
+<%= render 'shared/navbar' %>
+<p id="notice"><%= notice %></p>
+<h1 class="jumbotron"><%= @cook.name %></h1>
+	<div class="row">
+		<div class="col">
+			<section class="cook">
+				<%= image_tag @cook.picture, size:"32X32", class: 'card-img-top img-fluid' %>
+				<div class="card cook">
+				  <div class="card-body">
+				    <h4 class="card-title"><%= @cook.name%></h4>
+				    <p class="card-text"><%= @cook.biography %></p>
+				    <p> <%= @cook.address_commune %></p>
+				    <p> <%= @cook.address_region %></p>
+				  </div>
+			</section>
+		</div>
+		<div class="col">
+				<section class="menus">
+					<div class="row">
+						<%= @menus.each_slice(2) do |row|  %>
+							<% row.each do |menu| %>
+								<div class="col">
+									<div class="card-deck"">
+										<div class="card">
+											<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
+											<div class="card-body">
+											<h5><%= menu.name %></h5>
+											<p><%= "$ " + menu.price.to_s %><p>
+											<p class="card-text"><%= menu.description %></p>
+											<%= link_to "Reservar",  root_path , class: "btn btn-success" %>
+										</div>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					<div class="w-100" style="margin-top: 20px"></div>
+					<% end %>
+					</div>
+				</section>
+		</div>
+	</div>	
+
+
+
+

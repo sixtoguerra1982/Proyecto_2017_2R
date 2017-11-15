@@ -1,0 +1,70 @@
+<section class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-7">
+      <h2 class="display-4">Sign up</h2>
+      <hr class="bg-info">
+      <p class="pb-0 mb-0">Te invitamos a conocernos.</p>
+      <p class="text-danger small pt-0 mt-0">* Todos los campos son obligatorios.</p>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="row form-group">
+          <%= f.label :name, "Nombre:", class: "col-form-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.text_field :name, class: "form-control", autofocus: true %>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <%= f.label :email, "e-mail", class: "col-form-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.email_field :email, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <%= f.label :phone, "Teléfono", class: "col-form-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.text_field :phone, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <%= f.label :password, "Contraseña:", class: "col-form-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.password_field :password, class: "form-control", autocomplete: "off" %>
+          </div>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+        </div>
+
+        <div class="row form-group">
+          <%= f.label :password_confirmation, "Confirmar contraseña:", class: "col-form-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "off" %>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <%= f.label :picture, "Sube una foto para tu perfil:", class: "col-form-label col-md-4" %>
+          <div class="col-md-8">
+            <%= f.file_field :picture, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center">
+          <div class="actions">
+            <%= f.submit "Registrarse", class: "btn btn-outline-info" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="d-flex flex-row justify-content-center mt-2">
+        <p class="led mr-1">¿Ya estás registrado? <p>
+        <%= render "devise/shared/links", class: "mt-5" %>
+      </div>
+    </div>
+  </div>
+</section>
