@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :cooks
   has_many :orders
   has_many :menus, through: :orders
+  has_many :menus, through: :cooks
 end
