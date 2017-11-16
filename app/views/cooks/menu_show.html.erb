@@ -28,7 +28,7 @@
 											<h5><%= menu.name %></h5>
 											<p><%= "$ " + menu.price.to_s %><p>
 											<p class="card-text"><%= menu.description %></p>
-											<%= link_to "Reservar",  root_path , class: "btn btn-success" %>
+											<%= link_to "Reservar",  menu_orders_path(menu), method: :post, class: "btn btn-success" %>
 										</div>
 									</div>
 								</div>
@@ -39,8 +39,4 @@
 					</div>
 				</section>
 		</div>
-	</div>	
-
-
-
-
+	</div>
