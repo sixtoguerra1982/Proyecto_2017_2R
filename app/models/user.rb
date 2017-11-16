@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   
   has_many :cooks
-
+  has_many :menus, through: :cooks
 
   	
 end

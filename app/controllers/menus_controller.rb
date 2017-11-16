@@ -73,8 +73,9 @@ class MenusController < ApplicationController
 
     def set_menus
       #####################
-      @menus = Menu.where("cook_id=#{current_user.id}")
+      #@menus = Menu.where("cook_id=#{current_user.id}")
       #####################
+      @menus = current_user.menus
     end
 
     def set_cook
