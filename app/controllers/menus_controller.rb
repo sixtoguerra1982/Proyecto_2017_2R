@@ -70,14 +70,12 @@ class MenusController < ApplicationController
     def set_menu
       @menu = Menu.find(params[:id])
     end
-
     def set_menus
       #####################
       #@menus = Menu.where("cook_id=#{current_user.id}")
       #####################
       @menus = current_user.menus
     end
-
     def set_cook
       @cook = Cook.where(user_id: current_user.id)
     end  
