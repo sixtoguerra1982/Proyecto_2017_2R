@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20171110220610) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "menu_id"
+    t.integer "quantity", default: 0
+    t.integer "price"
     t.text "request_description"
     t.boolean "payed", default: false
     t.datetime "date"

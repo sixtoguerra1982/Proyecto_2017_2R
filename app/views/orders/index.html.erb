@@ -1,12 +1,41 @@
-<table class="table">
-  <% @orders.each do |order| %>
-    <tr>
-      <td> <%= order.menu.name %> </td>
-      <td> <%= order.menu.price %> </td>
-    </tr>
+<%= render 'shared/navbar' %>
+<p> <%= @orders.map { |order| order.menu.price }.sum %> </p>
+
+
+<section class="container mt-5">
+  <% if @orders.count > 0 %>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Menú</th>
+        <th>Valor</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td> <%= order.menu.name %> </td>
+          <td> $<%= order.price %></td>
+          <td> <%= order.quantity %> </td>
+          <td> $<%= order.menu.price * order.quantity %></td>
+        </tr>
+      <% end %>
+      <tr class="table bg-light">
+      <td></td>
+      <td></td>
+      <td><strong>Total de la compra:</strong></td>
+      <td><strong>$<%= @total %></strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to 'Limpiar carro', clean_orders_path, class: 'btn btn-outline-danger'  %>
+  <%= link_to 'Confirmar compra', "#", class: 'btn btn-success float-right'  %>
+
+  <% else %>
+    <p>No tienes productos en tu carro de compra.</p>
   <% end %>
-    <tr>
-      <td> Total: </td>
-      <td> <%= @orders.map { |order| order.menu.price }.sum %> </td>
-    </tr>
-</table>
+
+</section>

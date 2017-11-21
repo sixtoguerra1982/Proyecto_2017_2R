@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :create]
   end
 
+  resources :orders, only: :index do
+    collection do
+      get 'clean'
+    end
+  end
+
   root to: 'pages#index'
   get 'cooks/:id/menu_show', to: 'cooks#menu_show', as:'menu_show'
 
