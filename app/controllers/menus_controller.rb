@@ -1,5 +1,6 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_role
   before_action :set_cook, only: [:new, :edit, :create, :index]
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
   before_action :set_menus, only: [:new, :edit]
@@ -80,4 +81,12 @@ class MenusController < ApplicationController
     def menu_params
       params.require(:menu).permit(:name, :description, :picture, :price, :date)
     end	
+
+    #check role segun enum enum role: [:visit, :admin, :cook]
+
+    def check_role
+      if current_user.cook? == false
+        redirect_to root_path
+      end
+    end
 end

@@ -11,4 +11,8 @@ class User < ApplicationRecord
   has_many :orders
   has_many :menus, through: :orders
   has_many :menus, through: :cooks
+
+  enum role: [:visit, :admin, :cook]
+
+
 end
