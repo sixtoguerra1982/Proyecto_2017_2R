@@ -82,7 +82,7 @@ class MenusController < ApplicationController
       params.require(:menu).permit(:name, :description, :picture, :price, :date)
     end	
 
-    #check role segun enum enum role: [:visit, :admin, :cook]
+    #check role segun enum role: [:visit, :admin, :cook]
 
     def check_role
       if current_user.cook? == false
