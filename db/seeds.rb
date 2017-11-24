@@ -18,7 +18,8 @@ User.destroy_all
       password_confirmation: 'hola1234',
       phone: '+56 9 12345678',
       picture: 'default_user.png',
-      cook: true
+      cook: true,
+      role: "cook"
       )
     else
       User.create(
@@ -28,9 +29,23 @@ User.destroy_all
       password_confirmation: 'hola1234',
       phone: '+56 9 12345678',
       picture: 'default_user.png',
+      role: "visit"
       )
     end  
 end
+
+##USUARIO ADMINISTRADOR##
+User.create(
+  name: "Administrador La Tia.cl",
+  email: "administrador@latia.cl",
+  password: 'admin1234',
+  password_confirmation: 'admin1234',
+  phone: '+56 9 12345678',
+  picture: 'default_user.png',
+  role: "admin"
+  )
+###
+
 
 cont = 1
 2.times do |x|  
