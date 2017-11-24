@@ -15,4 +15,9 @@
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require turbolinks
+//= require jquery/dist/jquery 
+//= require fullcalendar/dist/fullcalendar
+//= require moment/min/moment.min
+//= require moment-timezone/moment-timezone
+//= require bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min.js
 //= require_tree .
