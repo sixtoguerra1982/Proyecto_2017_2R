@@ -9,9 +9,9 @@
         <div class='col-sm-6'>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
+                    <input type='text' class="form-control" autofocus value=" <%= Time.now %>">
                     <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
                     </span>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                          close: 'fa fa-close'
                     },
 					widgetPositioning:{
-						horizontal: 'auto',
+						horizontal: 'right',
 						vertical: 'bottom'
 					},
 					format: 'YYYY-MM-DD'
