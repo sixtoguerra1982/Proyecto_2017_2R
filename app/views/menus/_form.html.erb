@@ -26,7 +26,7 @@
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                   <a href="<%= new_menu_path %>">
-                    <%= image_tag "thumb_default_menu.png",class:"w-100", style:"border-radius: 5%"%>
+                    <%= image_tag "default_menu.png",class:"w-100", style:"border-radius: 5%"%>
                     <div class="carousel-caption">
                       <h3>Nuevo Menu</h3>
                     </div>
@@ -58,12 +58,11 @@
        <!-- -->
       </div>
       <div class="col-sm-6 col-md-8">
-        <form>
-          <div  class="form-group">
-            <div class="row">
+        <div class="formulario_menu">
+             <div class="row">
               <div class="col-12">
                 <div class="field">
-                  <%= form.label :name, "Nombre del plato principal" %><br>
+                  <%= form.label :name, "Nombre del plato principal" %>
                   <%= form.text_field :name, id: :menu_name, class: "form-control form-control-lg", autofocus: true, required: true%>
                 </div>
 
@@ -73,7 +72,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-sm">
                 <div class="field">
@@ -118,8 +116,8 @@
               <div class="col-sm">
                 <%= link_to 'Nuevo Menú', new_menu_path,  class: "btn btn-outline-primary btn-block" %>
               </div>
-          </div>
-        </form>
+            </div>
+        </div>
       </div>
     </div>
   </div>
