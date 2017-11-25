@@ -32,7 +32,7 @@ class MenusController < ApplicationController
     @menu.cook_id = @cook.ids.first
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to edit_menu_path(@menu), notice: 'El Menú fue creado' }
+        format.html { redirect_to new_menu_path, notice: 'El Menú fue creado' }
         format.json { render :show, status: :created, location: @menu }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if @menu.update(menu_params)
-        format.html { redirect_to edit_menu_path(@menu), notice: 'El Menú fue actualizado' }
+        format.html { redirect_to new_menu_path, notice: 'El Menú fue actualizado' }
         format.json { render :show, status: :ok, location: @menu }
       else
         format.html { render :edit }

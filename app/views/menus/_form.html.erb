@@ -12,19 +12,31 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-4">
+      <div class="col-sm-6 col-md-4">
        <!-- CARRUSEL DE PRODUCTOS-->
         <% unless @cook.first.nil? %>
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
+
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+
               <% @menus.each_with_index do |menu,index| %>
-                 <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" <%= 'class="active"' if index==0 %>></li>
+
+                 <li data-target="#carouselExampleIndicators" data-slide-to="<%= index + 1 %>"></li>
+
               <% end %>
             </ol>
-
             <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <a href="<%= new_menu_path %>">
+                  <%= image_tag "default_menu.png",class:"menu-img-sm d-block w-100" %>
+                  <div class="carousel-caption d-none d-md-block">
+                    <h3>Nuevo Menu</h3>
+                  </div>
+                </a>
+              </div>
               <% @menus.each_with_index do |menu,index| %>
-                  <div class="carousel-item  <%= 'active' if index == 0 %>">
+                  <div class="carousel-item">
                     <a href="<%= edit_menu_path(menu) %>">
                       <%= image_tag menu.picture.thumb ,class:"menu-img-sm d-block w-100" %>
                     <div class="carousel-caption d-none d-md-block">
@@ -47,7 +59,7 @@
         <% end %>
        <!-- -->
       </div>
-      <div class="col-8">
+      <div class="col-sm-6 col-md-8">
         <form>
           <div  class="form-group">
             <div class="row">
@@ -85,7 +97,7 @@
               <div class="col-md-12">
                 <div class="field">
                   <%= form.label :date, "Fecha de Venta" %><br>
-                  <%= form.date_select :date, id: :menu_date, class: "form-control" %>
+                  <%= form.date_select :date, id: :menu_date%>
                 </div>
               </div>
             </div>
@@ -102,7 +114,7 @@
               </div>
               <div class="col-sm">
                 <% unless @menu.id.nil? %>
-                <%= link_to 'Eliminar Este Menú', menu,  method: :delete, data: { confirm: 'Seguro de Eliminar Menú?' },  class: "btn btn-danger btn-block" %>
+                  <%= link_to 'Eliminar Este Menú', menu,  method: :delete, data: { confirm: 'Seguro de Eliminar Menú?' },  class: "btn btn-danger btn-block" %>
                 <% end %>
               </div>
               <div class="col-sm">
