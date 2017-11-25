@@ -1,61 +1,59 @@
 <!-- menú de navegación -->
 <%= render 'shared/navbarmenus' %>
-
 <div class="jumbotron"><h3>Mantenedor de Menus</h3></div>
-
 <%= form_with(model: menu, local: true) do |form| %>
   <% if notice.present? %>
     <div class="alert alert-primary alert-dismissible fade show" role="alert" id="notice">
       <%= notice %>
     </div>
   <% end %>
-
-  <div class="container">
+  <div class="container">    
     <div class="row">
       <div class="col-sm-6 col-md-4">
        <!-- CARRUSEL DE PRODUCTOS-->
         <% unless @cook.first.nil? %>
-          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
+          <div class="wrapper">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
 
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 
-              <% @menus.each_with_index do |menu,index| %>
+                <% @menus.each_with_index do |menu,index| %>
 
-                 <li data-target="#carouselExampleIndicators" data-slide-to="<%= index + 1 %>"></li>
-
-              <% end %>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-              <div class="carousel-item active">
-                <a href="<%= new_menu_path %>">
-                  <%= image_tag "default_menu.png",class:"menu-img-sm d-block w-100" %>
-                  <div class="carousel-caption d-none d-md-block">
-                    <h3>Nuevo Menu</h3>
-                  </div>
-                </a>
-              </div>
-              <% @menus.each_with_index do |menu,index| %>
-                  <div class="carousel-item">
-                    <a href="<%= edit_menu_path(menu) %>">
-                      <%= image_tag menu.picture.thumb ,class:"menu-img-sm d-block w-100" %>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3><%= menu.name %></h3>
+                   <li data-target="#carouselExampleIndicators" data-slide-to="<%= index + 1 %>"></li>
+                <% end %>
+              </ol>
+              <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                  <a href="<%= new_menu_path %>">
+                    <%= image_tag "thumb_default_menu.png",class:"w-100", style:"border-radius: 5%"%>
+                    <div class="carousel-caption">
+                      <h3>Nuevo Menu</h3>
                     </div>
-                    </a>
-                  </div>  
-              <% end %>
-            </div> 
-            <!-- BOTONES CARRUSEL-->
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-          </div>
+                  </a>
+                </div>
+                <% @menus.each_with_index do |menu,index| %>
+                    <div class="carousel-item">
+                      <a href="<%= edit_menu_path(menu) %>">
+                        <%= image_tag menu.picture.thumb ,class:"w-100", style:"border-radius: 5%" %>
+                      <div class="carousel-caption">
+                          <h3><%= menu.name %></h3>
+                      </div>
+                      </a>
+                    </div>  
+                <% end %>
+              </div> 
+              <!-- BOTONES CARRUSEL-->
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div> 
         <% end %>
        <!-- -->
       </div>
@@ -110,11 +108,11 @@
                     <% else %>
                     <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
                     <% end %>
-                </div>
+                </div><br>
               </div>
               <div class="col-sm">
                 <% unless @menu.id.nil? %>
-                  <%= link_to 'Eliminar Este Menú', menu,  method: :delete, data: { confirm: 'Seguro de Eliminar Menú?' },  class: "btn btn-danger btn-block" %>
+                  <%= link_to 'Eliminar Este Menú', menu,  method: :delete, data: { confirm: 'Seguro de Eliminar Menú?' },  class: "btn btn-danger btn-block" %><br>
                 <% end %>
               </div>
               <div class="col-sm">
