@@ -9,7 +9,9 @@
   <% end %>
   <div class="container">    
     <div class="row">
-      <div class="col-sm-6 col-md-4">
+      <div class="col-sm-6 col-md-5">
+        <div class="formulario_menu">
+
        <!-- CARRUSEL DE PRODUCTOS-->
         <% unless @cook.first.nil? %>
           <div class="wrapper">
@@ -37,6 +39,7 @@
                       <a href="<%= edit_menu_path(menu) %>">
                         <%= image_tag menu.picture.thumb ,class:"w-100", style:"border-radius: 5%" %>
                       <div class="carousel-caption">
+                          <p class="precio_menu">$<%= menu.price %></p>
                           <h3><%= menu.name %></h3>
                       </div>
                       </a>
@@ -56,8 +59,9 @@
           </div> 
         <% end %>
        <!-- -->
+      </div> 
       </div>
-      <div class="col-sm-6 col-md-8">
+      <div class="col-sm-6 col-md-7">
         <div class="formulario_menu">
              <div class="row">
               <div class="col-12">
