@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 #gema carrierwave
-gem 'mini_magick', '~> 1.0'
+gem 'mini_magick', '~> 4.8.0' 
 
 #gema carrierwave
 gem 'carrierwave', '~> 1.0'
