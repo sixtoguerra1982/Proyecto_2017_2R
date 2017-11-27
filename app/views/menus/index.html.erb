@@ -2,6 +2,46 @@
 <% unless @cook.first.nil? %>
   <div class="jumbotron"><h3>Bienvenido: <%=@cook.first.name%> </h3></div>
 <% end %>
+
+<!-- date_time_picker -->
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" autofocus value=" <%= Time.now %>">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    icons: {
+                         time: 'fa fa-clock-o',
+                         date: 'fa fa-calendar',
+                         up: 'fa fa-chevron-up',
+                         down: 'fa fa-chevron-down',
+                         previous: 'fa fa-chevron-left',
+                         next: 'fa fa-chevron-right',
+                         today: 'fa fa-calendar-check-o',
+                         clear: 'fa fa-trash-o',
+                         close: 'fa fa-close'
+                    },
+					widgetPositioning:{
+						horizontal: 'right',
+						vertical: 'bottom'
+					},
+					format: 'YYYY-MM-DD'
+            	});
+            });
+        </script>
+    </div>
+</div>
+<!-- -->
+
 <div class="container">
   <%= link_to 'New Menu', new_menu_path %> <br>
   <%= link_to 'Home', root_path%> 
