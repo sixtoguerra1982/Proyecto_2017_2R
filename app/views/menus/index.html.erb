@@ -6,43 +6,86 @@
 <!-- date_time_picker -->
 <div class="container">
     <div class="row">
-        <div class='col-sm-6'>
+        <div class='col-sm-12'>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" autofocus value=" <%= Time.now %>">
+                    <input type='text' class="form-control" autofocus value=" <%= Time.now.strftime('%d/%m/%Y') %>">
                     <span class="input-group-addon">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
                     </span>
                 </div>
             </div>
         </div>
-        <script>
-            $(function () {
-                $('#datetimepicker1').datetimepicker({
-                    icons: {
-                         time: 'fa fa-clock-o',
-                         date: 'fa fa-calendar',
-                         up: 'fa fa-chevron-up',
-                         down: 'fa fa-chevron-down',
-                         previous: 'fa fa-chevron-left',
-                         next: 'fa fa-chevron-right',
-                         today: 'fa fa-calendar-check-o',
-                         clear: 'fa fa-trash-o',
-                         close: 'fa fa-close'
-                    },
-					widgetPositioning:{
-						horizontal: 'right',
-						vertical: 'bottom'
-					},
-					format: 'YYYY-MM-DD'
-            	});
-            });
-        </script>
-    </div>
-</div>
-<!-- -->
+      </div>
+  </div>
+<!--  *******************-->
+<!--  Listado de Productos -->
 
 <div class="container">
-  <%= link_to 'New Menu', new_menu_path %> <br>
-  <%= link_to 'Home', root_path%> 
+  <div class="row">
+     <% @menus.each_slice(4) do |row| %>
+       <% row.each do |menu| %>
+          <div class="col">
+            <div class="card menu-img-stock">
+              <%= image_tag menu.picture.thumb, class: 'card-img-top' %>
+              <div class="body">
+                <h5> <%= menu.name %> </h5>
+                <div class="well">
+                  <%= form_with(model: menu, local: true) do |form| %>
+                    <div class="field">
+                      <%= form.label :date, "Fecha de Venta" %><br>
+                      <%= form.date_select :date, id: :menu_date %>
+                    </div></br>
+                    
+                    <div class="actions">
+                      <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
+                    </div></br>
+                  <% end %>
+                  <a href="<%= edit_menu_path(menu) %>">
+                  <div class="btn btn-success btn-block">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </div>
+                  </a>
+    						</div>
+              </div>
+            </div>
+          </div>
+       <% end %>
+       <div class="w-100" style="margin-top:20px"> </div>
+     <% end %>
+  </div>
 </div>
+<div class="container">
+  <%= link_to 'New Menu', new_menu_path %> <br>
+  <%= link_to 'Home', root_path%>
+</div>
+<!--  *******************-->
+
+
+        <script>
+          $(function () {
+            $('#datetimepicker1').datetimepicker({
+              format: 'DD/MM/YYYY',
+              icons: {
+                   time: 'fa fa-clock-o',
+                   date: 'fa fa-calendar',
+                   up: 'fa fa-chevron-up',
+                   down: 'fa fa-chevron-down',
+                   previous: 'fa fa-chevron-left',
+                   next: 'fa fa-chevron-right',
+                   today: 'fa fa-calendar-check-o',
+                   clear: 'fa fa-trash-o',
+                   close: 'fa fa-close'
+              },
+    					widgetPositioning:{
+    						horizontal: 'right',
+    						vertical: 'bottom'
+    					},
+      	    });
+            $("#datetimepicker1").on("dp.change", function (e) {
+              alert(e.date);
+            });
+          });
+        </script>
+
+<!-- -->
