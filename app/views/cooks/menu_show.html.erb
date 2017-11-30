@@ -20,12 +20,12 @@
 			<div class="row container">
 				<%= @menus.each_slice(2) do |row|  %>
 					<% row.each do |menu| %>
-						<div class="col">
+						<div class="col-md-6">
 							<div class="card-deck">
 								<div class="card">
 									<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
 									<div class="card-body">
-									<h5><%= menu.name %></h5>
+									<h6><%= menu.name %></h6>
 									<p><%= "$ " + menu.price.to_s %><p>
 									<p class="card-text"><%= menu.description %></p>
 									<%= link_to "Reservar",  menu_orders_path(menu), method: :post, class: "btn btn-success" %>

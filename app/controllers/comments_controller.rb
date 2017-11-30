@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @cook = Cook.find(params[:cook_id])
     @comment = Comment.new(content: params[:comment][:content], user: current_user)
