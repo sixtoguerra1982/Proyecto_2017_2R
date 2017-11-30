@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :create]
   end
 
+  resources :cooks do
+    resources :comments, only: [:create, :destroy]
+  end
+
   resources :orders, only: :index do
     collection do
       get 'clean'
