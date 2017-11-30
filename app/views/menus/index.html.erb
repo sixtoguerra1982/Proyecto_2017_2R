@@ -23,20 +23,22 @@
 
 <div class="container">
   <div class="row">
-     <% @menus.each_slice(4) do |row| %>
+     <% @menus.each_slice(3) do |row| %>
        <% row.each do |menu| %>
-          <div class="col">
+          <div class="col-md-4">
             <div class="card menu-img-stock">
               <%= image_tag menu.picture.thumb, class: 'card-img-top' %>
               <div class="body">
                 <h5> <%= menu.name %> </h5>
+                <p class="label_carausel">
+                  <%= number_to_currency(menu.price, separator: ',', delimiter: '.', precision: 0) %>
+                </p>
                 <div class="well">
                   <%= form_with(model: menu, local: true) do |form| %>
                     <div class="field">
                       <%= form.label :date, "Fecha de Venta" %><br>
                       <%= form.date_select :date, id: :menu_date %>
                     </div></br>
-                    
                     <div class="actions">
                       <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
                     </div></br>
@@ -78,12 +80,27 @@
                    close: 'fa fa-close'
               },
     					widgetPositioning:{
-    						horizontal: 'right',
+    						horizontal: 'auto',
     						vertical: 'bottom'
     					},
       	    });
             $("#datetimepicker1").on("dp.change", function (e) {
-              alert(e.date);
+              $.ajax({
+                url: '/path/to/file',
+                type: 'default GET (Other values: POST)',
+                dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+                data: {param1: 'value1'}
+              })
+              .done(function() {
+                console.log("success");
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+              });
+
             });
           });
         </script>
