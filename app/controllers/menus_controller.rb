@@ -4,11 +4,12 @@ class MenusController < ApplicationController
   before_action :set_cook, only: [:new, :edit, :create, :index]
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
   before_action :set_menus, only: [:new, :edit]
-  
+
   # GET /menus
   # GET /menus.json
   def index
     ##chequear si el usuario es cocinero
+     @menus = @cook.first.menus.where(date: Time.now)
   end
 
   # GET /menus/1
@@ -76,11 +77,11 @@ class MenusController < ApplicationController
     end
     def set_cook
       @cook = Cook.where(user_id: current_user.id)
-    end  
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
       params.require(:menu).permit(:name, :description, :picture, :price, :date)
-    end	
+    end
 
     #check role segun enum role: [:visit, :admin, :cook]
 
