@@ -41,13 +41,26 @@
 	</div>
 
 	<div class="row">
-		<div class="col-12 col-sm-12 col-md-4 col-lg-4">
+		<div class="col-12 col-sm-12 col-md-6 col-lg-6">
 			<legend>Comentar:</legend>
 			<%= form_with(model: [@cook, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
 				<div class="form-group">
 						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
 				</div>
 				<%= f.submit 'Comentar', class: 'btn btn-primary' %>
+			<% end %>
+		</div>
+		<div class="col-12 col-sm-12 col-md-6 col-lg-6">
+			<% counter = 0 %>
+			<% @cook.comments.each do |comment| %>
+			<div class="card">
+				<div class="card-body">
+					#<%= counter += 1 %>
+					<strong><%= comment.user.name %>:</strong>
+					<br>
+					<%= comment.content %>
+				</div>
+			</div>
 			<% end %>
 		</div>
 	</div>
