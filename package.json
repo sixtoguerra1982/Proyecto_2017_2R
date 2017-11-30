@@ -2,6 +2,7 @@
   "name": "proyecto",
   "private": true,
   "dependencies": {
-    "bootstrap4-datetimepicker": "^5.2.3"
+    "bootstrap4-datetimepicker": "^5.2.3",
+    "raty-js": "^2.8.0"
   }
 }

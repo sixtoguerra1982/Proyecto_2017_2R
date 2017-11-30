@@ -19,6 +19,7 @@
 //= require turbolinks
 
 //= require jquery/dist/jquery
+//=require raty-js/lib/jquery.raty
 //= require tether/dist/js/tether.js
 //= require moment/moment.js
 //= require bootstrap/dist/js/bootstrap.js
