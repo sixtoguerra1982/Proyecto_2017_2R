@@ -40,25 +40,26 @@
      <% @menus.each_slice(3) do |row| %>
        <% row.each do |menu| %>
           <div class="col-md-4" id='card_menu'>
-            <div class="card menu-img-stock" style=background-color:<%= "red;" if menu.stock < 1 %>>
+            <div class="card menu-img-stock" style=background-color:<%= state_menus(menu) %>;>
               <%= image_tag menu.picture.thumb, class: 'card-img-top' %>
               <div class="body">
                 <h5 class="titulo_tarjeta_stock"> <%= menu.name[0,30] %> </h5>
                 <p class="label_carausel">
                   <%= number_to_currency(menu.price, separator: ',', delimiter: '.', precision: 0) %>
                 </p>
-
-
                 <!--  Fecha y Publicar -->
-                <div class="label_carausel-50P">
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <%= menu.date.strftime('%d/%m/%Y') %>
-                </div>
-                <a href="<%= menu_update_date_path(menu) %>" data-method="post">
-                  <div class="label_carausel-50P2">
-                    <i class="fa fa-money" aria-hidden="true"></i>
+                <% if menu.editable == false %>
+                  <div class="label_carausel-50P">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                      <%= menu.date.strftime('%d/%m/%Y') %>
                   </div>
-                </a>
+                  <a href="<%= menu_update_date_path(menu) %>" data-method="post">
+                    <div class="label_carausel-50P2">
+                      <i class="fa fa-money" aria-hidden="true"></i>
+                    </div>
+                  </a>
+                <% end %>
+                <!--  -->
                 <hr>
                 <div class="well">
                   <!--  Collapse descripcion -->
@@ -73,15 +74,19 @@
                     </div>
                   </div>
                   <hr>
-                  <%= form_with(model: menu, local: true) do |form| %>
-                    <div class="field">
-                      <%= form.label :stock, "Stock Disponible" %><br>
-                      <%= form.number_field :stock, id: :stock, min: 0, required: true, class: "form-control form-control-lg" %>
-                    </div></br>
-                    <div class="actions">
-                      <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
-                    </div></br>
+                  <!--  FORMULARIO DE STOCK -->
+                  <% if menu.editable == true %>
+                    <%= form_with(model: menu, local: true) do |form| %>
+                      <div class="field">
+                        <%= form.label :stock, "Stock Disponible" %><br>
+                        <%= form.number_field :stock, id: :stock, min: 0, required: true, class: "form-control form-control-lg" %>
+                      </div></br>
+                      <div class="actions">
+                        <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
+                      </div></br>
+                    <% end %>
                   <% end %>
+                  <!--  -->
                   <a href="<%= edit_menu_path(menu) %>">
                   <div class="btn btn-success btn-block">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -97,6 +102,7 @@
      <% end %>
   </div>
 </div>
+
 <div class="container">
   <%= link_to 'New Menu', new_menu_path %> <br>
   <%= link_to 'Home', root_path%>
