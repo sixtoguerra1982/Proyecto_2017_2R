@@ -9,10 +9,14 @@ class MenusController < ApplicationController
   # GET /menus.json
   def index
     ##chequear si el usuario es cocinero
-     if params[:query] == "all"
+     if params[:q].present?
        @menus = @cook.first.menus.order(date: :asc).order(stock: :desc).order(:name)
      else
-       @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
+       if params[:query] == "all"
+         @menus = @cook.first.menus.order(date: :asc).order(stock: :desc).order(:name)
+       else
+         @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
+      end
     end
   end
 

@@ -12,6 +12,9 @@ class Menu < ApplicationRecord
       true
     end
   end
+ # Menu editable True cuando el menu se puede ingresar stock ya que la fecha de venta es igual a la
+ # actual.
 
+ # Menu editable
 
 end
