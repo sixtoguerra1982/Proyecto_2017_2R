@@ -42,15 +42,18 @@ body {
 }
 
 .menu-img-stock{
+  // Cuerpo de Cada Card Menu
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	margin: auto;
 	border-radius: 5%;
-	box-shadow: 0px 0px 0px 1px white;
+	box-shadow: 0px 0px 0px 1px #ececec;
 	padding: 10px;
+	background-color: #FFF;
 }
+
 
 .wrapper {
   max-width:100%;
@@ -67,10 +70,6 @@ body {
 	padding: 30px;
 }
 
-.label_carausel {
-	color: gold;
-	background-color: black;
-}
 .label_carausel_link {
 	color: gold;
 	background-color: transparent;

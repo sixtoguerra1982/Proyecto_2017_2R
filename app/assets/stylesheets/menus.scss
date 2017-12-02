@@ -1,3 +1,67 @@
 // Place all the styles related to the menus controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.titulo_tarjeta_stock{
+  // Nombre de Menu maximo 30 caracteres a mostrar
+  height: 48px;
+  width: 188px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.label_carausel {
+  //  Precio de Menu
+	color: gold;
+	background-color: black;
+  text-align: center;
+}
+
+.label_carausel-50P {
+  //  Precio de Menu
+	color: gold;
+	background-color: black;
+  //
+  width: 50%;
+  display: table;
+  float: left;
+  text-align: center;
+  //
+}
+
+.label_carausel-50P2 {
+  //  Precio de Menu
+	color: gold;
+  //
+  background-color: green;
+  width: 50%;
+  display: table;
+  float: left;
+  text-align: center;
+  box-shadow: 2px 2px 5px #999;
+  //
+}
+
+
+
+#stock{
+  // Cantidad de Stock Disponible
+  text-align: right;
+  padding-right: 2rem;
+}
+
+#menu_description{
+  width:  100%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+div.card.menu-img-stock{
+  padding-bottom: 1rem;
+}
+
+#card_menu{
+  // espacio entre cambio de filas
+  padding-top: 1vh;
+}

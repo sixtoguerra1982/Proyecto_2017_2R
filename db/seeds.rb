@@ -31,7 +31,7 @@ User.destroy_all
       picture: 'default_user.png',
       role: "visit"
       )
-    end  
+    end
 end
 
 ##USUARIO ADMINISTRADOR##
@@ -48,7 +48,7 @@ User.create(
 
 
 cont = 1
-2.times do |x|  
+2.times do |x|
   3.times do |i|
     Cook.create(
       name: Faker::Name.name_with_middle,
@@ -70,7 +70,7 @@ end
 
 
 3.times do |x|
-  4.times do |i|
+  10.times do |i|
     Menu.create(
       name:Faker::Food.dish,
       description: Faker::Food.ingredient,

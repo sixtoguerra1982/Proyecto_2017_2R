@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :menus do
-    resources :orders, only: [:index, :create]
-  end
+   resources :menus do
+     post :update_date
+     resources :orders, only: [:index, :create]
+   end
 
   resources :cooks do
     resources :comments, only: [:create, :destroy]

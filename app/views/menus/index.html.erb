@@ -1,15 +1,17 @@
 <%= render 'shared/navbarmenus' %>
 <% unless @cook.first.nil? %>
-  <div class="jumbotron"><h3>Bienvenido: <%=@cook.first.name%> </h3></div>
+  <div class="jumbotron mt-5"><h3>Bienvenido: <%=@cook.first.name%> </h3></div>
 <% end %>
-
 <!-- date_time_picker -->
+
 <div class="container">
     <div class="row">
         <div class='col-sm-12'>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" autofocus value=" <%= Time.now.strftime('%d/%m/%Y') %>">
+                    <input type='text' class="form-control" autofocus
+                      value="<%= (Time.now.strftime('%d/%m/%Y')) if params[:query].present? == false %>"
+                    >
                     <span class="input-group-addon">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
                     </span>
@@ -19,25 +21,62 @@
       </div>
   </div>
 <!--  *******************-->
-<!--  Listado de Productos -->
-
+<!--  SEARCH -->
+<div class="container">
+    <div class="row">
+        <div class='col-sm-12'>
+          <div class='form-group'>
+            <form action="<%= menus_path %>" method="GET">
+              <input type="submit" class="form-control btn btn-primary" value="Ver Todos">
+              <input type="text" class="form-control" name="query" value="all" style="visibility:hidden" >
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+<!-- TARJETAS DE STOCK -->
 <div class="container">
   <div class="row">
      <% @menus.each_slice(3) do |row| %>
        <% row.each do |menu| %>
-          <div class="col-md-4">
-            <div class="card menu-img-stock">
+          <div class="col-md-4" id='card_menu'>
+            <div class="card menu-img-stock" style=background-color:<%= "red;" if menu.stock < 1 %>>
               <%= image_tag menu.picture.thumb, class: 'card-img-top' %>
               <div class="body">
-                <h5> <%= menu.name %> </h5>
+                <h5 class="titulo_tarjeta_stock"> <%= menu.name[0,30] %> </h5>
                 <p class="label_carausel">
                   <%= number_to_currency(menu.price, separator: ',', delimiter: '.', precision: 0) %>
                 </p>
+
+
+                <!--  Fecha y Publicar -->
+                <div class="label_carausel-50P">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <%= menu.date.strftime('%d/%m/%Y') %>
+                </div>
+                <a href="<%= menu_update_date_path(menu) %>" data-method="post">
+                  <div class="label_carausel-50P2">
+                    <i class="fa fa-money" aria-hidden="true"></i>
+                  </div>
+                </a>
+                <hr>
                 <div class="well">
+                  <!--  Collapse descripcion -->
+                  <div id="menu_description">
+                     <a class="btn btn-link" style="color:black;" data-toggle="collapse" href="#collapseDescription<%= menu.id %>" aria-expanded="false" aria-controls="collapseExample">
+                        <p><%= menu.description[0,20] %>...</p>
+                      </a>
+                    <div class="collapse" id="collapseDescription<%= menu.id %>">
+                      <div class="card card-body">
+                        <%= menu.description[0,350] %>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
                   <%= form_with(model: menu, local: true) do |form| %>
                     <div class="field">
-                      <%= form.label :date, "Fecha de Venta" %><br>
-                      <%= form.date_select :date, id: :menu_date %>
+                      <%= form.label :stock, "Stock Disponible" %><br>
+                      <%= form.number_field :stock, id: :stock, min: 0, required: true, class: "form-control form-control-lg" %>
                     </div></br>
                     <div class="actions">
                       <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
@@ -46,6 +85,7 @@
                   <a href="<%= edit_menu_path(menu) %>">
                   <div class="btn btn-success btn-block">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-camera" aria-hidden="true"></i>
                   </div>
                   </a>
     						</div>
@@ -104,5 +144,4 @@
             });
           });
         </script>
-
 <!-- -->

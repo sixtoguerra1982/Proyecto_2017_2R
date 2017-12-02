@@ -2,14 +2,18 @@ class MenusController < ApplicationController
   before_action :authenticate_user!
   before_action :check_role
   before_action :set_cook, only: [:new, :edit, :create, :index]
-  before_action :set_menu, only: [:show, :edit, :update, :destroy]
+  before_action :set_menu, only: [:show, :edit, :update, :destroy, :update_date]
   before_action :set_menus, only: [:new, :edit]
 
   # GET /menus
   # GET /menus.json
   def index
     ##chequear si el usuario es cocinero
-     @menus = @cook.first.menus.where(date: Time.now)
+     if params[:query] == "all"
+       @menus = @cook.first.menus.order(:date).order(:name)
+     else
+       @menus = @cook.first.menus.where(date: Time.now).order(:stock).order(:name)
+    end
   end
 
   # GET /menus/1
@@ -46,12 +50,29 @@ class MenusController < ApplicationController
   # PATCH/PUT /menus/1.json
   def update
     respond_to do |format|
+      if params[:commit] == "EDITAR"
+        @menu.stock = 0
+      end
       if @menu.update(menu_params)
-        format.html { redirect_to new_menu_path, notice: 'El Menú fue actualizado' }
+        if params[:commit] == "GUARDAR"
+          format.html { redirect_to menus_path, notice: 'El Menú fue actualizado' }
+        else
+          format.html { redirect_to new_menu_path, notice: 'El Stock fue actualizado' }
+        end
         format.json { render :show, status: :ok, location: @menu }
       else
         format.html { render :edit }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_date
+    respond_to do |format|
+      @menu.stock = 0 if @menu.date.strftime("%Y%m%d") != Time.now.strftime("%Y%m%d")
+      @menu.date = Time.now
+      if @menu.save
+        format.html { redirect_to menus_path, notice: 'El Menú fue actualizado' }
       end
     end
   end
@@ -70,7 +91,11 @@ class MenusController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_menu
-      @menu = Menu.find(params[:id])
+      if params[:id]
+        @menu = Menu.find(params[:id])
+      else
+        @menu =  Menu.find(params[:menu_id])
+      end
     end
     def set_menus
       @menus = current_user.menus
@@ -80,7 +105,7 @@ class MenusController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
-      params.require(:menu).permit(:name, :description, :picture, :price, :date)
+      params.require(:menu).permit(:name, :description, :picture, :price, :date, :stock)
     end
 
     #check role segun enum role: [:visit, :admin, :cook]
