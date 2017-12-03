@@ -1,8 +1,9 @@
+
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
  <ol class="carousel-indicators">
 
-   <li data-target="#carouselExampleIndicators" data-slide-to="0" class="<%='active' if params[:action] == "new" %>"  ></li>
+   <li data-target="#carouselExampleIndicators" data-slide-to="0" class="<%='active' if params[:action] == "new" or params[:action] == "carousel" %>"  ></li>
 
    <% @menus.each_with_index do |menu,index| %>
      <li data-target="#carouselExampleIndicators" data-slide-to="<%= index + 1 %>" class="<%='active' if menu.id.to_s == params[:id] %>"></li>
@@ -11,7 +12,7 @@
 
  <div class="carousel-inner" role="listbox">
    <!--  PRIMERA IMAGEN NEW -->
-   <div class="carousel-item <%= 'active' if params[:action] == "new" %>">
+   <div class="carousel-item <%= 'active' if params[:action] == "new" or params[:action] == "carousel" %>">
      <%= image_tag "default_menu.png",class:"d-block img-fluid w-100", alt:"", style:"border-radius: 5%"%>
      <div class="carousel-caption">
        <h3>Nuevo Menu</h3>

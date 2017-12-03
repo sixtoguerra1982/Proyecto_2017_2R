@@ -1,7 +1,7 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
   before_action :check_role
-  before_action :set_cook, only: [:new, :edit, :create, :index]
+  before_action :set_cook, only: [:new, :edit, :create, :index, :carousel]
   before_action :set_menu, only: [:show, :edit, :update, :destroy, :update_date]
   before_action :set_menus, only: [:new, :edit]
 
@@ -23,6 +23,10 @@ class MenusController < ApplicationController
   # GET /menus/1
   # GET /menus/1.json
   def show
+  end
+
+  def carousel
+    @menus = @cook.first.menus.order(:name)
   end
 
   # GET /menus/new
@@ -55,7 +59,7 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if params[:commit] == "EDITAR"
-        @menu.stock = 0
+        # @menu.stock = 0
       end
       if @menu.update(menu_params)
         if params[:commit] == "GUARDAR"

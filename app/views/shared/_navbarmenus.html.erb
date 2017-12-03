@@ -12,11 +12,11 @@
     <div class="navbar-nav mr-auto ml-auto text-center">
       <a class="nav-item nav-link <%= 'active' if params[:action]=='index'%>" href="<%= menus_path %>">Cocinero</a>
       <li class="nav-item dropdown">
-        <a class="nav-link <%= 'active' if params[:action]=='new'%> dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link <%= 'active' if params[:action] != 'index' %> dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Menús
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Buscar Menú</a>
+          <a class="dropdown-item <%= 'active' if params[:action]=='carousel'%>" href="<%= carousel_menus_path %>">Buscar Menú</a>
           <a class="dropdown-item <%= 'active' if params[:action]=='new'%>" href="<%= new_menu_path %>"> Nuevo Menú</a>
         </div>
       </li>

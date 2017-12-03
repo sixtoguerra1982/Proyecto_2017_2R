@@ -16,9 +16,13 @@
           </div>
         </div>
       </div>
+      <br>
       <div class="row">
         <div class="col-sm">
           <div class="field">
+            <% if params[:action]=="edit" %>
+             <%= image_tag menu.picture.thumb, size:"50x50" %>
+            <% end %>
             <%= form.label :picture, "Pudes poner su foto" %>
             <%= form.file_field :picture, id: :menu_picture, class: "form-control-file" %>
           </div>
