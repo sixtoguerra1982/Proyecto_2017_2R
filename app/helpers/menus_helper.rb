@@ -7,7 +7,11 @@ module MenusHelper
         state_menus = '#ffc107'
       end
     else
+      if menu.editable == true
         state_menus = 'white'
+      else
+        state_menus = '#ffc107'
+      end
     end
   end
   # RED SIN STOCK

@@ -1,1 +1,11 @@
-<%= render 'form', menu: @menu %>
+<% unless @cook.first.nil? %>
+  <%=render 'form', menu: @menu %>
+  <div class="mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <%= render 'carousel' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<!--    -->
