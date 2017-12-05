@@ -4,23 +4,42 @@
 	<p id="notice"><%= notice %></p>
 	<h1 class="jumbotron"><%= @cook.name %></h1>
 	<div class="row">
-		<section class="cook col-12 col-sm-12 col-md-6 col-lg-6">
+		<section class="cook col-12 col-sm-12 col-md-4 col-lg-4">
 			<%= image_tag @cook.picture, size:"32X32", class: 'card-img-top img-fluid' %>
 			<div class="card cook">
 			  <div class="card-body">
-			    <h4 class="card-title"><%= @cook.name%></h4>
+			    <h5 class="card-title"><%= @cook.name%></h5>
 			    <p class="card-text"><%= @cook.biography %></p>
 			    <p> <%= @cook.address_commune %></p>
 			    <p> <%= @cook.address_region %></p>
 			  </div>
 			</div>
+				<div id="comments-box">
+					<h4 class="pt-2">Comentarios</h4>
+					<% @cook.comments.last(8).map do |comment| %>
+					<div class="card">
+						<div class="card-body">
+							<p><%= comment.content %></p>
+							<p class="comment-rating" data-score="<%= comment.rating %>"><%= current_user.email %> - </p>
+						</div>
+					</div>
+					<% end %>
+  			</div>
+				<div class="card border-info mb-3">
+					<div class="body">
+						<div class="container pt-3 pb-3">
+							<%= render "comments/form" %>
+						</div>
+					</div>
+				</div>
+
 		</section>
 
-		<section class="menus col-12 col-sm-12 col-md-6 col-lg-6">
+		<section class="menus col-12 col-sm-12 col-md-8 col-lg-8">
 			<div class="row container">
-				<%= @menus.each_slice(2) do |row|  %>
+				<%= @menus.each_slice(3) do |row|  %>
 					<% row.each do |menu| %>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="card-deck">
 								<div class="card">
 									<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
@@ -38,31 +57,6 @@
 			<% end %>
 			</div>
 		</section>
-	</div>
-
-	<div class="row">
-		<div class="col-12 col-sm-12 col-md-6 col-lg-6">
-			<legend>Comentar:</legend>
-			<div id="star"></div>
-			<%= form_with(model: [@cook, Comment.new], local: true, html: { class: 'form-horizontal' }) do |f| %>
-				<div class="form-group">
-						<%= f.text_area :content, placeholder: 'Escribe tu comentario aquí...', class: 'form-control' %>
-				</div>
-				<%= f.submit 'Comentar', class: 'btn btn-primary' %>
-			<% end %>
-		</div>
-		<div class="col-12 col-sm-12 col-md-6 col-lg-6">
-			<% counter = 0 %>
-			<% @cook.comments.each do |comment| %>
-			<div class="card">
-				<div class="card-body">
-					#<%= counter += 1 %>
-					<strong><%= comment.user.name %>:</strong>
-					<br>
-					<%= comment.content %>
-				</div>
-			</div>
-			<% end %>
-		</div>
+		<div class="col-12 col-sm-12 col-md-4 col-lg-4">
 	</div>
 </div>
