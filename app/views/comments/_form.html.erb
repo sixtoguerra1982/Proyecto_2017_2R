@@ -1,10 +1,12 @@
 <%= form_with(model: [@cook, @comment]) do |form| %>
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content, id: :comment_content %>
+
+  <div class="form-group">
+    <%= form.label :content, "Escribe tu comentario:" %>
+    <div id="rating-form"></div>
+    <%= form.text_area :content, id: :comment_content, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit "comentar" %>
+    <%= form.submit "comentar", class: 'btn btn-outline-primary' %>
   </div>
 <% end %>
