@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   }
 
    resources :menus do
+     collection do
+       get 'carousel'
+     end
      post :update_date
      resources :orders, only: [:index, :create]
    end

@@ -1,6 +1,8 @@
+<%= render 'shared/navbarmenus' %>
 <% unless @cook.first.nil? %>
-  <%=render 'form', menu: @menu %>
   <div class="mt-5">
+    <br>
+    <br>
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <%= render 'carousel' %>
@@ -8,4 +10,3 @@
     </div>
   </div>
 <% end %>
-<!--    -->

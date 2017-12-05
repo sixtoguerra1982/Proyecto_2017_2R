@@ -1,7 +1,7 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
   before_action :check_role
-  before_action :set_cook, only: [:new, :edit, :create, :index]
+  before_action :set_cook, only: [:new, :edit, :create, :carousel, :index]
   before_action :set_menu, only: [:show, :edit, :update, :destroy, :update_date]
   before_action :set_menus, only: [:new, :edit]
 
@@ -9,13 +9,25 @@ class MenusController < ApplicationController
   # GET /menus.json
   def index
     ##chequear si el usuario es cocinero
+     @fecha = Time.now
      if params[:q].present?
-       @menus = @cook.first.menus.order(date: :asc).order(stock: :desc).order(:name)
+       @menus = @cook.first.menus
      else
        if params[:query] == "all"
          @menus = @cook.first.menus.order(date: :asc).order(stock: :desc).order(:name)
        else
-         @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
+         "orders_count = '2'"
+         case params[:format]
+           when 'left'
+             @menus = @cook.first.menus.where(date: Time.now - 1.days).order(date: :asc).order(stock: :desc).order(:name)
+             @fecha = Time.now - 1.days
+           when 'to_day'
+             @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
+           when 'right'
+             @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
+           else
+             @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
+         end
       end
     end
   end
@@ -25,6 +37,9 @@ class MenusController < ApplicationController
   def show
   end
 
+  def carousel
+    @menus = @cook.first.menus.order(:name)
+  end
   # GET /menus/new
   def new
     @menu = Menu.new
@@ -55,7 +70,7 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if params[:commit] == "EDITAR"
-        @menu.stock = 0
+        # @menu.stock = 0 si la fecha nueva es diferente
       end
       if @menu.update(menu_params)
         if params[:commit] == "GUARDAR"

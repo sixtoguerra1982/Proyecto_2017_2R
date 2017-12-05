@@ -10,30 +10,38 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <div class="navbar-nav mr-auto ml-auto text-center">
-      <a class="nav-item nav-link active" href="<%= menus_path %>">Cocinero</a>
-      <a class="nav-item nav-link" href="<%= new_menu_path %>">Mantenedor de Menus</a>
+      <a class="nav-item nav-link <%= 'active' if params[:action]=='index'%>" href="<%= menus_path %>">Cocinero</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link <%= 'active' if params[:action] != 'index' %> dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Menús
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item <%= 'active' if params[:action]=='carousel'%>" href="<%= carousel_menus_path %>">Buscar Menú</a>
+          <a class="dropdown-item <%= 'active' if params[:action]=='new'%>" href="<%= new_menu_path %>"> Nuevo Menú</a>
+        </div>
+      </li>
     </div>
 
     <% if user_signed_in? %>
 
-    <div class="d-flex flex-row justify-content-center">
-        <a href="#" class="nav-item nav-link text-white">Bienvenido</a>
-    
-        <%= image_tag current_user.picture.thumb, class: "d-inline-block align-top avatar" %>
+      <div class="d-flex flex-row justify-content-center">
+          <a href="#" class="nav-item nav-link text-white">Bienvenido</a>
+
+          <%= image_tag current_user.picture.thumb, class: "d-inline-block align-top avatar" %>
 
 
-        <div class="d-flex flex-row justify-content-center">
-        <a href="#" class="nav-item nav-link text-white"><%= current_user.name %></a>
-        
-        <a href="<%= destroy_user_session_path %>" data-method="DELETE" class="btn btn-outline-primary text-white border-white mr-2">Salir</a>
+          <div class="d-flex flex-row justify-content-center">
+          <a href="#" class="nav-item nav-link text-white"><%= current_user.name %></a>
 
-    </div>
+          <a href="<%= destroy_user_session_path %>" data-method="DELETE" class="btn btn-outline-primary text-white border-white mr-2">Salir</a>
+
+      </div>
 
     <% else %>
-    <div class="d-flex flex-row justify-content-center">
-      <a href="<%= new_user_session_path %>" class="btn btn-outline-primary text-white border-white mr-2">Ingresar</a>
-      <a href="<%= new_user_registration_path %>" class="btn btn-outline-primary text-white border-white">Registrarse</a>
-    </div>
+      <div class="d-flex flex-row justify-content-center">
+        <a href="<%= new_user_session_path %>" class="btn btn-outline-primary text-white border-white mr-2">Ingresar</a>
+        <a href="<%= new_user_registration_path %>" class="btn btn-outline-primary text-white border-white">Registrarse</a>
+      </div>
     <% end %>
   </div>
 </nav>
