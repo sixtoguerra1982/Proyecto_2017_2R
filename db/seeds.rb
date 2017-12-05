@@ -9,6 +9,7 @@
 Menu.destroy_all
 Cook.destroy_all
 User.destroy_all
+
 10.times do |i|
     if i + 1 < 6
       User.create(

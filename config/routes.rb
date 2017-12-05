@@ -10,7 +10,7 @@ Rails.application.routes.draw do
    end
 
   resources :cooks do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :update, :destroy, :show]
   end
 
   resources :orders, only: :index do
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   end
 
   root to: 'pages#index'
-  get 'cooks/:id/menu_show', to: 'cooks#menu_show', as:'menu_show'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

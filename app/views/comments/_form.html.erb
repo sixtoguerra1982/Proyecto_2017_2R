@@ -1,0 +1,10 @@
+<%= form_with(model: [@cook, @comment]) do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :comment_content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "comentar" %>
+  </div>
+<% end %>
