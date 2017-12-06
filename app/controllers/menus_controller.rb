@@ -8,6 +8,7 @@ class MenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
+     @foco = params[:foco]
      @fecha = Date.today
      if params[:query] == "all"
        # query stream todos los menus
@@ -76,7 +77,7 @@ class MenusController < ApplicationController
       end
       if @menu.update(menu_params)
         if params[:commit] == "GUARDAR"
-          format.html { redirect_to menus_path, notice: 'El Menú fue actualizado' }
+          format.html { redirect_to menus_path(:foco => @menu.id), notice: 'El Menú fue actualizado' }
         else
           format.html { redirect_to new_menu_path, notice: 'El Stock fue actualizado' }
         end
@@ -93,7 +94,7 @@ class MenusController < ApplicationController
       @menu.stock = 0 if @menu.date.strftime("%Y%m%d") != Time.now.strftime("%Y%m%d")
       @menu.date = Date.today
       if @menu.save
-        format.html { redirect_to menus_path, notice: 'El Menú fue actualizado' }
+        format.html { redirect_to menus_path(:foco => @menu.id), notice: 'El Menú fue actualizado' }
       end
     end
   end
@@ -118,12 +119,15 @@ class MenusController < ApplicationController
         @menu =  Menu.find(params[:menu_id])
       end
     end
+
     def set_menus
       @menus = current_user.menus
     end
+
     def set_cook
       @cook = Cook.where(user_id: current_user.id)
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
       params.require(:menu).permit(:name, :description, :picture, :price, :date, :stock)

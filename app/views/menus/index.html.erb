@@ -9,7 +9,7 @@
         <div class='col-sm-12'>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" autofocus
+                    <input type='text' class="form-control" <%= 'autofocus' if @foco.nil? %>
                     name="valor" value="<%= (@fecha.strftime('%d/%m/%Y')) if params[:query].present? == false %>"
                     >
                     <span class="input-group-addon">

@@ -41,7 +41,12 @@
                   <%= form_with(model: menu, local: true) do |form| %>
                     <div class="field">
                       <%= form.label :stock, "Stock Disponible" %><br>
-                      <%= form.number_field :stock, id: :stock, min: 0, required: true, class: "form-control form-control-lg" %>
+                      <% if @foco.to_s == menu.id.to_s %>
+                        <%= form.number_field :stock, id: :stock, min: 0, autofocus: true,
+                        required: true, class: "form-control form-control-lg" %>
+                      <% else %>
+                        <%= form.number_field :stock, id: :stock, min: 0, required: true, class: "form-control form-control-lg" %>
+                      <% end %>
                     </div></br>
                     <div class="actions">
                       <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
