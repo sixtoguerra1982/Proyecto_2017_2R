@@ -99,6 +99,14 @@ class MenusController < ApplicationController
     end
   end
 
+  def close_card
+    @menu =  Menu.find(params[:menu_id])
+    if @menu.stock == 0 and @menu.date == Date.today
+      @menu.date = Date.today - 1.days
+      @menu.save
+    end
+  end
+
   # DELETE /menus/1
   # DELETE /menus/1.json
   def destroy
