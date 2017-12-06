@@ -6,7 +6,7 @@ class Menu < ApplicationRecord
   has_many :users, through: :cooks
 
   def editable
-    if self.date.strftime("%Y%m%d") != Time.now.strftime("%Y%m%d")
+    if self.date != Date.today
       false
     else
       true
