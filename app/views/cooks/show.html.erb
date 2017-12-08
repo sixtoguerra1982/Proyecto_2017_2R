@@ -1,45 +1,23 @@
 <!-- menú de navegación -->
 <%= render 'shared/navbar' %>
-<div class="container">
-	<p id="notice"><%= notice %></p>
-	<h1 class="jumbotron"><%= @cook.name %></h1>
-	<div class="row">
-		<section class="cook col-12 col-sm-12 col-md-4 col-lg-4">
+<section class="container pt-5">
+	<!-- Datos cocinero -->
+	<div class="row jumbotron">
+		<div class="col-12 col-sm-12 col-md-4">
 			<%= image_tag @cook.picture, size:"32X32", class: 'card-img-top img-fluid' %>
-			<div class="card cook">
-			  <div class="card-body">
-			    <h5 class="card-title"><%= @cook.name%></h5>
-			    <p class="card-text"><%= @cook.biography %></p>
-			    <p> <%= @cook.address_commune %></p>
-			    <p> <%= @cook.address_region %></p>
-			  </div>
-			</div>
-				<div id="comments-box">
-					<h4 class="pt-2">Comentarios</h4>
-					<% @cook.comments.last(8).map do |comment| %>
-					<div class="card">
-						<div class="card-body">
-							<p><%= comment.content %></p>
-							<p class="comment-rating" data-score="<%= comment.rating %>"><%= current_user.email %> - </p>
-						</div>
-					</div>
-					<% end %>
-  			</div>
-				<div class="card border-info mb-3">
-					<div class="body">
-						<div class="container pt-3 pb-3">
-							<%= render "comments/form" %>
-						</div>
-					</div>
-				</div>
+		</div>
+		<div class="col-12 col-sm-12 col-md-8">
+			<h5><%= @cook.name %></h5>
+			<p><%= @cook.biography %></p>
+		</div>
+	</div>
 
-		</section>
-
-		<section class="menus col-12 col-sm-12 col-md-8 col-lg-8">
-			<div class="row container">
-				<%= @menus.each_slice(3) do |row|  %>
-					<% row.each do |menu| %>
-						<div class="col-md-4">
+	<div class="row">
+		<!-- Listado menú -->
+		<div class="menus col-12 col-sm-12 col-md-8 col-lg-8">
+			<div class="row">
+				<% @menus.each do |menu|  %>
+						<div class="col-12 col-sm-12 col-md-6 col-lg-4">
 							<div class="card-deck">
 								<div class="card">
 									<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
@@ -52,11 +30,30 @@
 							</div>
 						</div>
 					</div>
-				<% end %>
-			<div class="w-100" style="margin-top: 20px"></div>
 			<% end %>
 			</div>
-		</section>
-		<div class="col-12 col-sm-12 col-md-4 col-lg-4">
+		</div>
+
+		<!-- Comentarios -->
+		<div class="cook col-12 col-sm-12 col-md-4 col-lg-4">
+				<div id="comments-box">
+					<h4 class="pt-2">Comentarios</h4>
+					<% @cook.comments.last(8).map do |comment| %>
+					<div class="card">
+						<div class="card-body">
+							<p><%= comment.content %></p>
+							<p class="comment-rating" data-score="<%= comment.rating %>"><%= comment.user.name %> - </p>
+						</div>
+					</div>
+					<% end %>
+				</div>
+				<div class="card border-info mb-3">
+					<div class="body">
+						<div class="container pt-3 pb-3">
+							<%= render "comments/form" %>
+						</div>
+					</div>
+				</div>
+		</div>
 	</div>
-</div>
+</section>
