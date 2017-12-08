@@ -1,6 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-   before_action :configure_sign_up_params, only: [:create]
-   before_action :configure_sign_up_params, only: [:update]
+   before_action :configure_sign_up_params, only: [:create, :update, :edit]
 
   # GET /resource/sign_up
   # def new
@@ -13,14 +12,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+   super
+  end
 
   # DELETE /resource
   # def destroy
@@ -36,16 +35,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+  def update_resource(resource, params)
+    Require current password if user is trying to change password.
+    return super if params["password"].present?
+
+    # Allows user to update registration information without password.
+    resource.update_without_password(params.except("current_password"))
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
-   def configure_sign_up_params
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :picture, :phone])
-   end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :picture, :phone])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :picture, :phone])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
-  #   super(resource)
+  #  super(resource)
   # end
 
   # The path used after sign up for inactive accounts.
