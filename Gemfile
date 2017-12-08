@@ -5,8 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#gema activeadmin
+gem 'activeadmin'
+
 #gema carrierwave
-gem 'mini_magick', '~> 4.8.0' 
+gem 'mini_magick', '~> 4.8.0'
 
 #gema carrierwave
 gem 'carrierwave', '~> 1.0'
