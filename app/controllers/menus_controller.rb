@@ -12,24 +12,35 @@ class MenusController < ApplicationController
      @fecha = Date.today
      if params[:query] == "all"
        # query stream todos los menus
-       @menus = @cook.first.menus.order(date: :asc).order(stock: :desc).order(:name)
+       @menus = @cook.first.menus.order(date: :desc).order(:name)
      else
        case params[:format]
          when 'left'
            # los dias dirente a hoy
-           @menus = @cook.first.menus.where("menus.date != ?", Date.today).order(date: :asc).order(stock: :desc).order(:name)
+           @menus = @cook.first.menus.where("menus.date != ?", Date.today).order(date: :asc).order(:name)
            @fecha = Date.today - 1.days
          when 'to_day'
            # OK hoy
-           @menus = @cook.first.menus.where(date: Date.today).order(date: :asc).order(stock: :desc).order(:name)
+           @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
          when 'right'
            # dias igual a hoy y stock cero
-           @menus = @cook.first.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(date: :asc).order(stock: :desc).order(:name)
+           @menus = @cook.first.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(:name)
          else
            if params[:datetimep1].present?
-             @menus = ""
+             str = params[:datetimep1]
+             @menus = @cook.first.menus.where("menus.date = ?", str.to_date).order(:name)
            else
-             @menus = @cook.first.menus.where(date: Date.today).order(date: :asc).order(stock: :desc).order(:name)
+             if params[:foco].present?
+               # edicion de stock y posicion de autofocus
+               @menu = Menu.find(params[:foco])
+               if @menu.stock > 0
+                 @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
+               else
+                 @menus = @cook.first.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(:name)
+               end
+             else
+               @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
+            end
           end
        end
     end
@@ -90,21 +101,9 @@ class MenusController < ApplicationController
   end
 
   def update_date
-    respond_to do |format|
       @menu.stock = 0 if @menu.date.strftime("%Y%m%d") != Time.now.strftime("%Y%m%d")
       @menu.date = Date.today
-      if @menu.save
-        format.html { redirect_to menus_path(:foco => @menu.id), notice: 'El Menú fue actualizado' }
-      end
-    end
-  end
-
-  def close_card
-    @menu =  Menu.find(params[:menu_id])
-    if @menu.stock == 0 and @menu.date == Date.today
-      @menu.date = Date.today - 1.days
       @menu.save
-    end
   end
 
   # DELETE /menus/1

@@ -9,7 +9,6 @@ Rails.application.routes.draw do
        get 'carousel'
      end
      post :update_date
-     post :close_card
      resources :orders, only: [:index, :create]
    end
 

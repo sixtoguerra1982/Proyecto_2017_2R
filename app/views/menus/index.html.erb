@@ -9,7 +9,7 @@
         <div class='col-sm-12'>
             <div class="form-group">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" <%= 'autofocus' if @foco.nil? %>
+                    <input type='text' id='datetimepicker1Val' class="form-control" <%= 'autofocus' if @foco.nil? %>
                     name="valor" value="<%= (@fecha.strftime('%d/%m/%Y')) if params[:query].present? == false %>"
                     >
                     <span class="input-group-addon">
@@ -40,13 +40,13 @@
     <div class="col-sm-4">
       <a href="<%= menus_path('left') %>">
         <div class="btn btn-warning btn-block">
-          <i class="fa fa-arrow-circle-o-left" aria-hidden="true" style="color:white;"></i>
+          <i class="fa fa-arrow-circle-o-left active" aria-hidden="true" style="color:white;"></i>
         </div>
       </a>
     </div>
     <div class="col-sm-4">
       <a href="<%=  menus_path('to_day')%>">
-        <div class="btn btn-success btn-block">
+        <div class="btn btn-outline-primary btn-block">
           <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
         </div>
       </a>
@@ -63,8 +63,7 @@
 <!---ARROWS----->
 <!-- TARJETAS DE STOCK -->
 <div class="container" id ="list_menu">
-  <hr>
-  <%= render 'list_menu' %>
+  <%= render 'list_menu', menus: @menus %>
 </div>
 <!--  -->
 
@@ -99,7 +98,7 @@
                 url: '<%= menus_path %>',
                 type: 'GET',
                 dataType: 'script',
-                data: {datetimep1: $(this).val()}
+                data: {datetimep1: $(datetimepicker1Val).val()}
               })
               .done(function() {
                 console.log("success");

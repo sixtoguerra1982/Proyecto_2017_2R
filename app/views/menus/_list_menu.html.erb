@@ -1,10 +1,8 @@
+<hr>
 <div class="row">
-   <% @menus.each_slice(3) do |row| %>
+   <% menus.each_slice(3) do |row| %>
      <% row.each do |menu| %>
         <div class="col-md-4" id='card_menu<%= menu.id %>'>
-          <small id="close-<%= menu.id %>">
-            <%= link_to 'X', menu_close_card_path(menu), method: :post, remote: true %>
-          </small>
           <div class="card menu-img-stock" style=background-color:<%= state_menus(menu) %>;>
             <%= image_tag menu.picture.thumb, class: 'card-img-top' %>
             <div class="body">
@@ -18,11 +16,13 @@
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <%= menu.date.strftime('%d/%m/%Y') %>
                 </div>
-                <a href="<%= menu_update_date_path(menu) %>" data-method="post">
+
+                 <a href="<%= menu_update_date_path(menu) %>" data-method="post" data-remote="true" rel="nofollow">
                   <div class="label_carausel-50P2">
                     <i class="fa fa-money" aria-hidden="true"></i>
                   </div>
                 </a>
+
               <% end %>
               <!--  -->
               <hr>

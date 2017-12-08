@@ -5,6 +5,28 @@
   <!-- Jumbotron -->
   <div class="jumbotron mt-5 rounded-0 bg-transparent">
     <div class="container">
+
+      <% if user_signed_in? %>
+        <div class="row mt-5">
+          <div class="col-sm-6">
+            <div class="lead">
+              <a href="#">
+                <%= image_tag current_user.picture.thumb, class:'access_icon' %>
+              </a>
+            </div>
+          </div>
+          <% if current_user.cook == true %>
+            <div class="col-sm-6">
+              <div class="lead">
+                <a href="<%= menus_path %>">
+                  <%= image_tag "logo-02.svg", class:'access_icon' %>
+                </a>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
       <h1 class="display-3">La tía.cl!</h1>
       <p class="lead text-white">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
       <p class="lead">

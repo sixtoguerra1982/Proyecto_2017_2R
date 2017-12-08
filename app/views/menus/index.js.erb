@@ -1,1 +1,3 @@
-$("#list_menu").html("<%= j render @menus %>");
+$("#list_menu").hide(500);
+$("#list_menu").empty().append("<%= j render 'list_menu', menus: @menus %>");
+$("#list_menu").show(500);
