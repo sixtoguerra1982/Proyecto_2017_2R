@@ -1,34 +1,48 @@
 class MenusController < ApplicationController
   before_action :authenticate_user!
   before_action :check_role
-  before_action :set_cook, only: [:new, :edit, :create, :carousel, :index]
+  before_action :set_cook, only: [:new, :edit, :update, :create, :carousel, :index]
   before_action :set_menu, only: [:show, :edit, :update, :destroy, :update_date]
   before_action :set_menus, only: [:new, :edit]
 
   # GET /menus
   # GET /menus.json
   def index
-    ##chequear si el usuario es cocinero
-     @fecha = Time.now
-     if params[:q].present?
-       @menus = @cook.first.menus
+     @foco = params[:foco]
+     @fecha = Date.today
+     if params[:query] == "all"
+       # query stream todos los menus
+       @menus = @cook.first.menus.order(date: :desc).order(:name)
      else
-       if params[:query] == "all"
-         @menus = @cook.first.menus.order(date: :asc).order(stock: :desc).order(:name)
-       else
-         "orders_count = '2'"
-         case params[:format]
-           when 'left'
-             @menus = @cook.first.menus.where(date: Time.now - 1.days).order(date: :asc).order(stock: :desc).order(:name)
-             @fecha = Time.now - 1.days
-           when 'to_day'
-             @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
-           when 'right'
-             @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
+       case params[:format]
+         when 'left'
+           # los dias dirente a hoy
+           @menus = @cook.first.menus.where("menus.date != ?", Date.today).order(date: :asc).order(:name)
+           @fecha = Date.today - 1.days
+         when 'to_day'
+           # OK hoy
+           @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
+         when 'right'
+           # dias igual a hoy y stock cero
+           @menus = @cook.first.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(:name)
+         else
+           if params[:datetimep1].present?
+             str = params[:datetimep1]
+             @menus = @cook.first.menus.where("menus.date = ?", str.to_date).order(:name)
            else
-             @menus = @cook.first.menus.where(date: Time.now).order(date: :asc).order(stock: :desc).order(:name)
-         end
-      end
+             if params[:foco].present?
+               # edicion de stock y posicion de autofocus
+               @menu = Menu.find(params[:foco])
+               if @menu.stock > 0
+                 @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
+               else
+                 @menus = @cook.first.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(:name)
+               end
+             else
+               @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
+            end
+          end
+       end
     end
   end
 
@@ -74,7 +88,7 @@ class MenusController < ApplicationController
       end
       if @menu.update(menu_params)
         if params[:commit] == "GUARDAR"
-          format.html { redirect_to menus_path, notice: 'El Menú fue actualizado' }
+          format.html { redirect_to menus_path(:foco => @menu.id), notice: 'El Menú fue actualizado' }
         else
           format.html { redirect_to new_menu_path, notice: 'El Stock fue actualizado' }
         end
@@ -87,13 +101,9 @@ class MenusController < ApplicationController
   end
 
   def update_date
-    respond_to do |format|
       @menu.stock = 0 if @menu.date.strftime("%Y%m%d") != Time.now.strftime("%Y%m%d")
-      @menu.date = Time.now
-      if @menu.save
-        format.html { redirect_to menus_path, notice: 'El Menú fue actualizado' }
-      end
-    end
+      @menu.date = Date.today
+      @menu.save
   end
 
   # DELETE /menus/1
@@ -116,12 +126,15 @@ class MenusController < ApplicationController
         @menu =  Menu.find(params[:menu_id])
       end
     end
+
     def set_menus
       @menus = current_user.menus
     end
+
     def set_cook
       @cook = Cook.where(user_id: current_user.id)
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
       params.require(:menu).permit(:name, :description, :picture, :price, :date, :stock)

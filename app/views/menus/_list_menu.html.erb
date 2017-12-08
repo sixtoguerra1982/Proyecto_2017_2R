@@ -1,7 +1,8 @@
+<hr>
 <div class="row">
-   <% @menus.each_slice(3) do |row| %>
+   <% menus.each_slice(3) do |row| %>
      <% row.each do |menu| %>
-        <div class="col-md-4" id='card_menu'>
+        <div class="col-md-4" id='card_menu<%= menu.id %>'>
           <div class="card menu-img-stock" style=background-color:<%= state_menus(menu) %>;>
             <%= image_tag menu.picture.thumb, class: 'card-img-top' %>
             <div class="body">
@@ -15,11 +16,13 @@
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <%= menu.date.strftime('%d/%m/%Y') %>
                 </div>
-                <a href="<%= menu_update_date_path(menu) %>" data-method="post">
+
+                 <a href="<%= menu_update_date_path(menu) %>" data-method="post" data-remote="true" rel="nofollow">
                   <div class="label_carausel-50P2">
                     <i class="fa fa-money" aria-hidden="true"></i>
                   </div>
                 </a>
+
               <% end %>
               <!--  -->
               <hr>
@@ -41,7 +44,12 @@
                   <%= form_with(model: menu, local: true) do |form| %>
                     <div class="field">
                       <%= form.label :stock, "Stock Disponible" %><br>
-                      <%= form.number_field :stock, id: :stock, min: 0, required: true, class: "form-control form-control-lg" %>
+                      <% if @foco.to_s == menu.id.to_s %>
+                        <%= form.number_field :stock, id: :stock, min: 0, autofocus: true,
+                        required: true, class: "form-control form-control-lg" %>
+                      <% else %>
+                        <%= form.number_field :stock, id: :stock, min: 0, required: true, class: "form-control form-control-lg" %>
+                      <% end %>
                     </div></br>
                     <div class="actions">
                       <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
