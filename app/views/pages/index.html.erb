@@ -41,7 +41,7 @@
 <section id="cocineros" class="container mt-5">
   <div class="row">
     <% @cooks.each do |cook| %>
-    <div class="col-md-4">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
       <div class="card mt-3">
         <%= image_tag cook.picture, class: 'card-img-top img-fluid' %>
         <div class="card-body">
@@ -51,7 +51,7 @@
           <p> <%= cook.address_region %></p>
         </div>
         <div class="card-footer d-flex flex-row justify-content-center">
-          <%= link_to("ver Menu", cook_path(cook), class:"btn btn-outline-primary mr-2" ) %>
+          <%= link_to("Ver menú", cook_path(cook), class:"btn btn-outline-primary mr-2" ) %>
         </div>
       </div>
     </div>
