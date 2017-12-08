@@ -1,0 +1,28 @@
+<section class="container mt-5">
+  <div class="row justify-content-center pt-3">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+      <h4 class="display-5">Editar Datos:</h4>
+      <hr class="bg-info">
+      <%= form_with(model: @user, local: true) do |form| %>
+
+       <div class="field">
+         <%= form.label :biography %>
+         <%= form.text_area :biography, id: :cook_biography_id %>
+       </div>
+
+       <div class="field">
+         <%= form.label :name %>
+         <%= form.text_field :name, id: :cook_name_id %>
+       </div>
+
+       <div class="field">
+         <%= form.label :email %>
+         <%= form.text_field :email, id: :cook_email_id %>
+      </div>
+       <div class="actions">
+         <%= form.submit %>
+       </div>
+     <% end %>
+    </div>
+  </div>
+</section>

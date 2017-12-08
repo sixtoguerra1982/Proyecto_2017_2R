@@ -12,7 +12,7 @@ Rails.application.routes.draw do
      resources :orders, only: [:index, :create]
    end
 
-  resources :cooks, only: [:show] do
+  resources :cooks do
     resources :comments, only: [:create, :update, :destroy, :show]
   end
 
