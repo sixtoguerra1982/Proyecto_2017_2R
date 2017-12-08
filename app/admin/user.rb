@@ -13,6 +13,7 @@ ActiveAdmin.register User do
 # end
   permit_params :name, :phone, :cook, :role
   index do
+    column :id
     column :email
     column :name
     column :phone
@@ -48,8 +49,8 @@ ActiveAdmin.register User do
    end
   end
 
-  filter :email, as: :select
-  filter :cook
-  filter :role
+  filter :role, as: :select, collection: {'Visita' => 0, 'Admin' => 1, 'Cocinero' => 2}
+  filter :email
+  filter :created_at
 
 end
