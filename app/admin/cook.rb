@@ -12,4 +12,17 @@ ActiveAdmin.register Cook do
 #   permitted
 # end
 
+  index do
+    column :id
+    column :name
+    column :email
+    column :address
+    column :picture
+    column :biography
+    column :user_id
+    actions # agregamos acciones view, edit y delete
+  end
+
+  filter :email
+  filter :created_at
 end
