@@ -1,6 +1,8 @@
 <%= render 'shared/navbarmenus' %>
 <% unless @cook.first.nil? %>
-  <div class="jumbotron mt-5"><h3>Bienvenido: <%=@cook.first.name%> </h3></div>
+  <div class="jumbotron mt-5">
+   <h3>Bienvenido:<a href="<%= edit_cook_path(@cook.first) %>"><%=@cook.first.name%></a></h3>
+  </div>
 <% end %>
 <!-- date_time_picker -->
 

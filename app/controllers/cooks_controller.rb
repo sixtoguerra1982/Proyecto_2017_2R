@@ -1,6 +1,6 @@
 
 class CooksController < ApplicationController
-	before_action :set_cook, only: [:show, :update, :destroy]
+	before_action :set_cook, only: [:show, :edit]
 
 	def show
 	  	@menus = @cook.menus
@@ -8,7 +8,7 @@ class CooksController < ApplicationController
 	end
 
 	def edit
-		@cook = Cook.where(user_id: current_user, cook: true)
+
 	end
 
 	private
@@ -18,6 +18,7 @@ class CooksController < ApplicationController
 	 	end
 
 		def set_cook
+			byebug
 			@cook = Cook.find(params[:id])
 		end
 end
