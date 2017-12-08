@@ -20,9 +20,6 @@
 
 //= require jquery/dist/jquery
 //=require raty-js/lib/jquery.raty
-//= require tether/dist/js/tether.js
-//= require moment/moment.js
-//= require bootstrap/dist/js/bootstrap.js
 //= require bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min
 //= require moment-timezone/builds/moment-timezone.min
 
