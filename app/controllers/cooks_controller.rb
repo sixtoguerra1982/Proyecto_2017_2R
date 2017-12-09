@@ -18,7 +18,6 @@ class CooksController < ApplicationController
 	 	end
 
 		def set_cook
-			byebug
 			@cook = Cook.find(params[:id])
 		end
 end

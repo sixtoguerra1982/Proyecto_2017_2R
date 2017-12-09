@@ -19,6 +19,33 @@
          <%= form.label :email %>
          <%= form.text_field :email, id: :cook_email_id %>
       </div>
+
+      <div class="field">
+        <%= form.label :address_region, "Region" %>
+        <input list="address_region" name="list_address_region" value='<%= @cook.address_region %>' />
+        <datalist id="address_region">
+
+          <option label='<%= @cook.address_region %>' value='<%= @cook.address_region %>'>
+
+        </datalist>
+      </div>
+
+      <div class="field">
+        <%= form.label :address_city, "Ciudad" %>
+        <input list="address_city" name="list_address_city" value='<%= @cook.address_city %>' />
+        <datalist id="address_city">
+          <option label='<%= @cook.address_city %>' value='<%= @cook.address_city %>'>
+        </datalist>
+      </div>
+
+      <div class="field">
+        <%= form.label :address_city, "comuna" %>
+        <input list="address_commune" name="list_address_commune" value='<%= @cook.address_commune %>' />
+        <datalist id="address_commune">
+          <option label='<%= @cook.address_commune %>' value='<%= @cook.address_commune %>'>
+        </datalist>
+      </div>
+
        <div class="actions">
          <%= form.submit %>
        </div>
