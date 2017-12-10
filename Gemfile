@@ -7,22 +7,21 @@ end
 
 #gema activeadmin
 gem 'activeadmin'
-
 #gema carrierwave
 gem 'mini_magick', '~> 4.8.0'
-
 #gema carrierwave
 gem 'carrierwave', '~> 1.0'
-
 # gema feaker
 gem 'faker'
-
 # Bootstrap 4 beta
 gem 'bootstrap', '~> 4.0.0.beta2.1'
 # jquery
 gem 'jquery-rails'
 # Devise
 gem 'devise'
+# Omniauth Facebook
+gem 'omniauth-facebook'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
