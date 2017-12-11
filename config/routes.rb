@@ -14,7 +14,7 @@ Rails.application.routes.draw do
      resources :orders, only: [:index, :create]
    end
 
-  resources :cooks do
+  resources :cooks, only: [:show, :edit, :update] do
     resources :comments, only: [:create, :update, :destroy, :show]
   end
 

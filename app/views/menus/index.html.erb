@@ -1,7 +1,23 @@
 <%= render 'shared/navbarmenus' %>
 <% unless @cook.first.nil? %>
   <div class="jumbotron mt-5">
-   <h3>Bienvenido:<a href="<%= edit_cook_path(@cook.first) %>"><%=@cook.first.name%></a></h3>
+    <div class="row" style="text-align: center;">
+      <div class="col mt-4">
+        <h3>Bienvenido: <a href="<%= edit_cook_path(@cook.first) %>"><%=@cook.first.name%></a></h3>
+      </div>
+      <!--  Editar datos-->
+      <div class="col">
+        <a href="<%= edit_cook_path(@cook.first) %>">
+            <i class="fa fa-user-circle fa-5x" aria-hidden="true"></i>
+        </a>
+      </div>
+      <!--  Ver show -->
+      <div class="col">
+        <a href="<%= cook_path(@cook.first) %>">
+          <i class="fa fa-eye fa-5x" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
   </div>
 <% end %>
 <!-- date_time_picker -->
