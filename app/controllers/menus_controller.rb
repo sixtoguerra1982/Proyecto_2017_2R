@@ -2,7 +2,7 @@ class MenusController < ApplicationController
   before_action :authenticate_user!
   before_action :check_role
   before_action :set_cook, only: [:new, :edit, :update, :create, :carousel, :index]
-  before_action :set_menu, only: [:show, :edit, :update, :destroy, :update_date]
+  before_action :set_menu, only: [:edit, :update, :destroy, :update_date]
   before_action :set_menus, only: [:new, :edit]
 
   # GET /menus
@@ -46,10 +46,6 @@ class MenusController < ApplicationController
     end
   end
 
-  # GET /menus/1
-  # GET /menus/1.json
-  def show
-  end
 
   def carousel
     @menus = @cook.first.menus.order(:name)
