@@ -1,6 +1,9 @@
 
 class CooksController < ApplicationController
+	before_action :authenticate_user!, only:[:edit, :update]
 	before_action :set_cook, only: [:show, :edit, :update]
+	before_action :check_role, only:[:edit, :update]
+
 
 	def show
 	  	@menus = @cook.menus
@@ -12,12 +15,10 @@ class CooksController < ApplicationController
 
 	def update
 		respond_to do |format|
+			@cook.address_region = params[:list_address_region]
+			@cook.address_city = params[:list_address_city]
+			@cook.address_commune = params[:list_address_commune]
 			if @cook.update(cook_params)
-				@cook.address_region = params[:list_address_region]
-				@cook.address_city = params[:list_address_city]
-				@cook.address_commune = params[:list_address_commune]
-				byebug
-				@cook.save
 				format.html { redirect_to menus_path, notice: 'Datos actualizados' }
 				format.json { render :show, status: :ok, location: @cook }
 			else
@@ -38,4 +39,10 @@ class CooksController < ApplicationController
 		def set_cook
 			@cook = Cook.find(params[:id])
 		end
+
+		def check_role
+      if current_user.cook? == false or @cook.user_id != current_user.id
+        redirect_to root_path
+      end
+    end
 end

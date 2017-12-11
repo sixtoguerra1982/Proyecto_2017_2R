@@ -1,6 +1,6 @@
 <%= render 'shared/navbar' %>
 <section class="container mt-5">
-  <div class="row justify-content-center pt-3">
+  <div class="row justify-content-center pt-3 formulario_menu">
     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
       <h3>Editar Datos de registro:</h3>
 
@@ -12,12 +12,12 @@
 
         <div class="form-group">
           <%= f.label :name, "Nombre de usuario:" %>
-          <%= f.text_field :name, class: "form-control", autofocus: true, required: true %>
+          <%= f.text_field :name, class: "form-control form-control-lg", autofocus: true, required: true %>
         </div>
 
         <div class="form-group">
           <%= f.label :phone, "Teléfono" %>
-          <%= f.text_field :phone, class: "form-control" %>
+          <%= f.text_field :phone, class: "form-control form-control-lg" %>
         </div>
 
         <div class="form-group">
@@ -30,22 +30,25 @@
         <h5> Cambia tu contraseña:</h5>
 
         <div class="form-group">
-          <%= f.label :current_password %> <i>(Necesitamos su contraseña actual para confirmar sus cambios)</i><br />
-          <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+          <%= f.label :current_password, "Contaseña Actual" %>
+          <%= f.password_field :current_password, autocomplete: "off", class: "form-control form-control-lg" %>
+          <i>(Necesitamos su contraseña actual para
+            confirmar cambio de contraseña)</i><br />
         </div>
 
         <div class="form-group">
-          <%= f.label :password, "Contraseña nueva" %> <i>(Déjelo en blanco si no quieres cambiar tu password)</i><br />
-          <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+          <%= f.label :password, "Contraseña nueva" %>
+          <%= f.password_field :password, autocomplete: "off", class: "form-control form-control-lg" %>
+           <i>(Déjelo en blanco si no quieres cambiar tu password)</i><br />
           <% if @minimum_password_length %>
             <br />
-            <em><%= @minimum_password_length %> Caracteres Minimo</em>
           <% end %>
         </div>
 
         <div class="form-group">
-          <%= f.label :password_confirmation , "Confirma tu nueva contraseña"%><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+          <%= f.label :password_confirmation , "Confirma tu nueva contraseña"%>
+          <em><%= @minimum_password_length %> Caracteres Minimo</em><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control form-control-lg" %>
         </div>
 
         <div class="d-flex flex-row">

@@ -75,10 +75,13 @@
          </div>
          <br>
          <div class="row">
-           <div class="col-sm-3">
+           <div class="col-md-4">
              <div class="actions">
                <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
              </div>
+            </div>
+            <div class="col-md-4 offset-md-4">
+              <%= link_to "Volver", :back, class: "ml-auto btn btn-outline-info btn-block" %>
             </div>
           </div>
      <% end %>
