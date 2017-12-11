@@ -12,7 +12,12 @@
 
         <div class="form-group">
           <%= f.label :name, "Nombre de usuario:" %>
-          <%= f.text_field :name, class: "form-control form-control-lg", autofocus: true, required: true %>
+          <%= f.text_field :name, class: "form-control", autofocus: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, "email:" %>
+          <%= f.text_field :email, class: "form-control" %>
         </div>
 
         <div class="form-group">
