@@ -59,7 +59,7 @@ cont = 1
       address_region: Faker::Address.state,
       address_commune: Faker::Address.community,
       address_city: Faker::Address.city,
-      picture: "image-0#{x + 1}",
+      picture: "cook_default.jpg",
       biography: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
       vedent, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       ##referencia con el usuario#

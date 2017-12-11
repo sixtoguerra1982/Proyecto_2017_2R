@@ -25,13 +25,15 @@
           <%= f.file_field :picture, class: "form-control" %>
         </div>
 
+
+        <hr class="bg-info">
+        <h5> Cambia tu contraseña:</h5>
+
         <div class="form-group">
           <%= f.label :current_password %> <i>(Necesitamos su contraseña actual para confirmar sus cambios)</i><br />
           <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
         </div>
 
-        <hr class="bg-info">
-        <h5> Cambia tu contraseña:</h5>
         <div class="form-group">
           <%= f.label :password, "Contraseña nueva" %> <i>(Déjelo en blanco si no quieres cambiar tu password)</i><br />
           <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
@@ -57,3 +59,6 @@
     </div>
   </div>
 </section>
+<footer>
+  <p></p>
+</footer>

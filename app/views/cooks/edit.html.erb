@@ -1,55 +1,90 @@
-<section class="container mt-5">
-  <div class="row justify-content-center pt-3">
-    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-      <h4 class="display-5">Editar Datos:</h4>
-      <hr class="bg-info">
+<%= render 'shared/navbarmenus' %>
+<div class="jumbotron mt-5"><h3>Editar Datos</h3></div>
+<section class="container formulario_menu">
+  <div class="row">
+    <div class="col-12">
       <%= form_with(model: @cook, local: true) do |form| %>
+        <div class="field">
+          <%= form.label :name, "Nombre de Cocinero" %>
+          <%= form.text_field :name, id: :cook_name_id, class: "form-control form-control-lg", autofocus: true, required: true %>
+          <br>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="field">
+               <%= form.label :email, "E-Mail (@)" %>
+               <%= form.text_field :email, id: :cook_email_id, class: "form-control form-control-lg", required: true %>
+               <br>
+            </div>
+          </div>
+          <div class="col">
+            <div class="field">
+               <%= form.label :phone, "Telefono" %>
+               <%= form.text_field :phone, id: :cook_email_id, class: "form-control form-control-lg" %>
+            </div>
+          </div>
+        </div>
 
-       <div class="field">
-         <%= form.label :biography %>
-         <%= form.text_area :biography, id: :cook_biography_id %>
-       </div>
+        <hr class="bg-info">
+        <div class="row">
+          <div class="offset-md col-md-7">
+            <div class="field">
+              <%= form.label :picture, "Cambia tu foto de Presentación" %>
+              <%= form.file_field :picture, id: :cook_picture, class: "form-control-file" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <%= image_tag @cook.picture.thumb, size: "100x100", class: "img-fluid" %>
+          </div>
+        </div>
+        <hr class="bg-info">
 
-       <div class="field">
-         <%= form.label :name %>
-         <%= form.text_field :name, id: :cook_name_id %>
-       </div>
+         <div class="field">
+           <%= form.label :biograph, "Escribe tu Presentacion" %>
+           <%= form.text_area :biography, id: :cook_biography_id, placeholder:'Escribe tu perfil de latia.cl !!!', class: "form-control form-control-lg" %>
+           <br>
+         </div>
 
-       <div class="field">
-         <%= form.label :email %>
-         <%= form.text_field :email, id: :cook_email_id %>
-      </div>
-
-      <div class="field">
-        <%= form.label :address_region, "Region" %>
-        <input list="address_region" name="list_address_region" value='<%= @cook.address_region %>' />
-        <datalist id="address_region">
-
-          <option label='<%= @cook.address_region %>' value='<%= @cook.address_region %>'>
-
-        </datalist>
-      </div>
-
-      <div class="field">
-        <%= form.label :address_city, "Ciudad" %>
-        <input list="address_city" name="list_address_city" value='<%= @cook.address_city %>' />
-        <datalist id="address_city">
-          <option label='<%= @cook.address_city %>' value='<%= @cook.address_city %>'>
-        </datalist>
-      </div>
-
-      <div class="field">
-        <%= form.label :address_city, "comuna" %>
-        <input list="address_commune" name="list_address_commune" value='<%= @cook.address_commune %>' />
-        <datalist id="address_commune">
-          <option label='<%= @cook.address_commune %>' value='<%= @cook.address_commune %>'>
-        </datalist>
-      </div>
-
-       <div class="actions">
-         <%= form.submit %>
-       </div>
+         <div class="field">
+           <%= form.label :address, "Direccion" %>
+           <%= form.text_field :address, id: :address, class: "form-control form-control-lg" %>
+           <br>
+         </div>
+         <div class="row">
+           <div class="col field">
+             <%= form.label :address_region, "Region" %>
+             <input list="address_region" name="list_address_region" value='<%= @cook.address_region %>' class= "form-control form-control-lg" />
+             <datalist id="address_region">
+               <option label='<%= @cook.address_region %>' value='<%= @cook.address_region %>'>
+             </datalist>
+           </div>
+           <div class="col field">
+             <%= form.label :address_city, "Ciudad" %>
+             <input list="address_city" name="list_address_city" value='<%= @cook.address_city %>' class= "form-control form-control-lg" />
+             <datalist id="address_city">
+               <option label='<%= @cook.address_city %>' value='<%= @cook.address_city %>'>
+             </datalist>
+           </div>
+           <div class=" col field">
+             <%= form.label :address_city, "comuna" %>
+             <input list="address_commune" name="list_address_commune" value='<%= @cook.address_commune %>' class= "form-control form-control-lg" />
+             <datalist id="address_commune">
+               <option label='<%= @cook.address_commune %>' value='<%= @cook.address_commune %>'>
+             </datalist>
+           </div>
+         </div>
+         <br>
+         <div class="row">
+           <div class="col-sm-3">
+             <div class="actions">
+               <%= form.submit 'GUARDAR', class: "btn btn-success btn-block" %>
+             </div>
+            </div>
+          </div>
      <% end %>
     </div>
   </div>
 </section>
+<footer>
+  <p></p>
+</footer>
