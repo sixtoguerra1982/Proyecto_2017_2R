@@ -30,6 +30,10 @@
         <div class="d-flex flex-row justify-content-center">
           <div class="actions">
             <%= f.submit "Ingresar", class: "btn btn-outline-info" %>
+            <button class="loginBtn loginBtn--facebook">
+              <%= link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path,
+              class: 'text-white' %>
+            </button>
           </div>
         </div>
       <% end %>
