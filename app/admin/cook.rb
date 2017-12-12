@@ -11,14 +11,14 @@ ActiveAdmin.register Cook do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+  permit_params :name, :email, :phone, :address, :address_region,
+                :address_commune, :address_city, :biography, :picture, :user_id
 
   index do
     column :id
     column :name
     column :email
     column :address
-    column :picture
-    column :biography
     column :user_id
     actions # agregamos acciones view, edit y delete
   end
