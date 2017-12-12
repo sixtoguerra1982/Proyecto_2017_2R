@@ -20,6 +20,12 @@ ActiveAdmin.register Cook do
     column :email
     column :address
     column :user_id
+    column :menus do |cook|
+      cook.menus.count
+    end
+    column :comments do |cook|
+      cook.comments.count
+    end
     actions # agregamos acciones view, edit y delete
   end
 
