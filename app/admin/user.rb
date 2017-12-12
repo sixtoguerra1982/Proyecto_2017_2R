@@ -11,7 +11,7 @@ ActiveAdmin.register User do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  permit_params :name, :phone, :cook, :role
+  permit_params :name, :email, :phone, :cook, :role, :password, :password_confirmation
   index do
     column :id
     column :email
@@ -29,12 +29,12 @@ ActiveAdmin.register User do
 
   form do |f|
     inputs 'User' do
-      input :email, input_html: { readonly: true, disabled: true  }, as: :string if !f.object.new_record?
       input :name
-      input :phone
+      input :email
       input :cook
       input :role
       input :password
+      input :password_confirmation
     end
     actions
   end
