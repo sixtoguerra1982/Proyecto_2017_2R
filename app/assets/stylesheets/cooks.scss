@@ -45,3 +45,11 @@ div.card-body{
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+
+.score{
+	margin: 30px;
+	position: fixed;
+	background-color: white;
+	border: 3px solid #555;
+	z-index: 1000;
+}
