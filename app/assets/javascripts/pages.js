@@ -1,2 +1,2 @@
-  var scroll = new SmoothScroll('a[href*="#"]',{
-  });
+document.addEventListener("turbolinks:load", function(){
+});
