@@ -38,6 +38,10 @@ raty-js@^2.8.0:
   dependencies:
     jquery "^3.2.1"
 
+smooth-scroll@^12.1.5:
+  version "12.1.5"
+  resolved "https://registry.yarnpkg.com/smooth-scroll/-/smooth-scroll-12.1.5.tgz#b6d8deca371a9edd5ea3ad291ef0fb7e741ed41e"
+
 tether@^1.4.0:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/tether/-/tether-1.4.2.tgz#ab9605b5ecf38f088b3da3d54d2b439207e48d04"
