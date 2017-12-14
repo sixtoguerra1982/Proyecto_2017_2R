@@ -12,9 +12,8 @@ class Menu < ApplicationRecord
       true
     end
   end
- # Menu editable True cuando el menu se puede ingresar stock ya que la fecha de venta es igual a la
- # actual.
 
- # Menu editable
-
+  validates :name, length: { maximum: 30 }
+  validates :description, length: { maximum: 30 }
+  validates :price, length: { maximum: 5 }
 end

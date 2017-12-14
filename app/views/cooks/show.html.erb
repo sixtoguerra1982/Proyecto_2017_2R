@@ -12,16 +12,31 @@
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 	<% end %>
 	<!--  *************************-->
+=======
+	</div>
+
+
+>>>>>>> 71c66e603b2e28beb247e5aa05ad30f492c6009a
 	<!-- Datos cocinero -->
 	<div class="row jumbotron">
 		<div class="col-12 col-sm-12 col-md-4">
 			<%= image_tag @cook.picture, size:"32X32", class: 'card-img-top img-fluid' %>
 		</div>
 		<div class="col-12 col-sm-12 col-md-8">
-			<h5><%= @cook.name %></h5>
-			<p><%= @cook.biography %></p>
+			<h5><%= @cook.name[0,30] %></h5>
+			<a class="btn btn-outline-primary" data-toggle="collapse"
+				 href="#collapseBiography<%= @cook.id %>"
+				 aria-expanded="false" aria-controls="collapseExample">
+				 Mi trabajo <i class="fa fa-angle-down" aria-hidden="true"></i>
+			</a>
+			<div class="collapse" id="collapseBiography<%= @cook.id %>">
+				<div class="card card-body">
+					<p><%= @cook.biography[0,350] %></p>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -30,19 +45,31 @@
 		<div class="menus col-12 col-sm-12 col-md-8 col-lg-8">
 			<div class="row">
 				<% @menus.each do |menu|  %>
+					<% if menu.stock > 1 %>
 						<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-							<div class="card-deck">
-								<div class="card">
+								<div class="card mt-3">
 									<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
 									<div class="card-body">
-									<h6><%= menu.name %></h6>
+									<h6><%= menu.name[0,30] %></h6>
 									<p><%= "$ " + menu.price.to_s %><p>
+<<<<<<< HEAD
 									<p class="card-text"><%= menu.description %></p>
 									<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true, class: "btn btn-success" %>
+=======
+										<a class="btn btn-outline-primary" data-toggle="collapse"
+											 href="#collapseDescription<%= menu.id %>"
+											 aria-expanded="false" aria-controls="collapseExample">
+											 Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
+										</a>
+										<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
+											<p class="card-text"><%= menu.description[0,30] %></p>
+										</div>
+									<%= link_to "Reservar",  menu_orders_path(menu), method: :post, class: "btn btn-success" %>
+>>>>>>> 71c66e603b2e28beb247e5aa05ad30f492c6009a
 								</div>
 							</div>
-						</div>
 					</div>
+				<% end %>
 			<% end %>
 			</div>
 		</div>
@@ -54,7 +81,7 @@
 					<% @cook.comments.last(8).map do |comment| %>
 					<div class="card">
 						<div class="card-body">
-							<p><%= comment.content %></p>
+							<p><%= comment.content[0,30] %></p>
 							<p class="comment-rating" data-score="<%= comment.rating %>"><%= comment.user.name %> - </p>
 						</div>
 					</div>

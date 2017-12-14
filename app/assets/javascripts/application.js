@@ -20,6 +20,7 @@
 
 //= require jquery/dist/jquery
 //= require raty-js/lib/jquery.raty
+//= require smooth-scroll/dist/js/smooth-scroll
 //= require tether/dist/js/tether.js
 //= require moment/moment.js
 //= require bootstrap/dist/js/bootstrap.js

@@ -36,7 +36,7 @@
       <h1 class="display-3 text-center">La tía.cl!</h1>
       <p class="lead text-white text-center">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
       <p class="lead d-flex flex-row justify-content-center">
-        <a class="btn btn-primary btn-lg" href="#cocineros" role="button">Ver cocineros</a>
+        <a data-scroll href="#cocineros" role="button" class="btn btn-primary btn-lg">Ver cocineros</a>
       </p>
     </div>
   </div>
@@ -51,10 +51,16 @@
       <div class="card mt-3">
         <%= image_tag cook.picture, class: 'card-img-top img-fluid' %>
         <div class="card-body">
-          <h4 class="card-title"><%= cook.name%></h4>
-          <p class="card-text"><%= cook.biography %></p>
-          <p> <%= cook.address_commune %></p>
-          <p> <%= cook.address_region %></p>
+          <a class="btn btn-default" data-toggle="collapse"
+    				 href="#collapseBiography<%= cook.id %>"
+    				 aria-expanded="false" aria-controls="collapseExample">
+    				 <h5 class="card-title"><%= cook.name[0,25]%> <i class="fa fa-caret-down" aria-hidden="true"></i></h5>
+          </a>
+          <div class="collapse" id="collapseBiography<%= cook.id %>">
+    				<p><%= cook.biography[0,100] %></p>
+    			</div>
+          <p> <%= cook.address_commune[0,20] %></p>
+          <p> <%= cook.address_region[0,20] %></p>
         </div>
         <div class="card-footer d-flex flex-row justify-content-center">
           <%= link_to("Ver menú", cook_path(cook), class:"btn btn-outline-primary mr-2" ) %>
@@ -65,3 +71,10 @@
   </div>
 </section>
 <!-- Fin Cards -->
+
+<!-- SmoothScroll -->
+<script>
+  var scroll = new SmoothScroll('a[href*="#"]',{
+  });
+</script>
+<!-- Fin SmoothScroll -->
