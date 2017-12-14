@@ -3,15 +3,23 @@
 
 <section class="container pt-5">
 	<!--  TOTAL DE ORDEN -->
-	<div class="row">
-		<div class="offset-md-8 col-md-4">
-			<div class="score">
-				<p>$1.500</p>
+	<% if user_signed_in? %>
+		<div class="row">
+			<div class="offset-md-8 col-md-4">
+				<div class="score">
+					<p id="order_price"><%= number_to_currency(@total, separator: ',', delimiter: '.', precision: 0) %></p>
+					<%= link_to "Carro de Compra", orders_path, class: "btn btn-success" %>
+				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
+	<% end %>
+	<!--  *************************-->
+=======
 	</div>
 
 
+>>>>>>> 71c66e603b2e28beb247e5aa05ad30f492c6009a
 	<!-- Datos cocinero -->
 	<div class="row jumbotron">
 		<div class="col-12 col-sm-12 col-md-4">
@@ -44,6 +52,10 @@
 									<div class="card-body">
 									<h6><%= menu.name[0,30] %></h6>
 									<p><%= "$ " + menu.price.to_s %><p>
+<<<<<<< HEAD
+									<p class="card-text"><%= menu.description %></p>
+									<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true, class: "btn btn-success" %>
+=======
 										<a class="btn btn-outline-primary" data-toggle="collapse"
 											 href="#collapseDescription<%= menu.id %>"
 											 aria-expanded="false" aria-controls="collapseExample">
@@ -53,6 +65,7 @@
 											<p class="card-text"><%= menu.description[0,30] %></p>
 										</div>
 									<%= link_to "Reservar",  menu_orders_path(menu), method: :post, class: "btn btn-success" %>
+>>>>>>> 71c66e603b2e28beb247e5aa05ad30f492c6009a
 								</div>
 							</div>
 					</div>

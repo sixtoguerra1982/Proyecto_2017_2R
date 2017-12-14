@@ -27,4 +27,7 @@
 //= require bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min
 //= require moment-timezone/builds/moment-timezone.min
 
+//= require datatables.net/js/jquery.dataTables.js
+//= require datatables.net-bs4/js/dataTables.bootstrap4.js
+
 //= require_tree .

@@ -1,41 +1,74 @@
 <%= render 'shared/navbar' %>
-<p> <%= @orders.map { |order| order.menu.price }.sum %> </p>
+<!-- Datos cocinero -->
 
+<% unless @cook.nil? %>
+  <div class="row jumbotron mt-5">
+    <div class="col-12 col-sm-12 col-md-4">
+      <%= image_tag @cook.picture, size:"32X32", class: 'card-img-top img-fluid' %>
+    </div>
+    <div class="col-12 col-sm-12 col-md-8">
+      <h5><%= @cook.name %></h5>
+      <p><%= @cook.biography %></p>
+    </div>
+  </div>
+<% end %>
+<!-- _________ -->
 
-<section class="container mt-5">
+<section class="container">
   <% if @orders.count > 0 %>
-    <table class="table">
-    <thead>
-      <tr>
-        <th>Menú</th>
-        <th>Valor</th>
-        <th>Cantidad</th>
-        <th>Subtotal</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
+    <table class="table table-striped" id="myTable">
+      <thead>
         <tr>
-          <td> <%= order.menu.name %> </td>
-          <td> $<%= order.price %></td>
-          <td> <%= order.quantity %> </td>
-          <td> $<%= order.menu.price * order.quantity %></td>
+          <th>Menú</th>
+          <th>Valor</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th></th>
         </tr>
-      <% end %>
-      <tr class="table bg-light">
-      <td></td>
-      <td></td>
-      <td><strong>Total de la compra:</strong></td>
-      <td><strong>$<%= @total %></strong></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <%= link_to 'Limpiar carro', clean_orders_path, class: 'btn btn-outline-danger'  %>
-  <%= link_to 'Confirmar compra', "#", class: 'btn btn-success float-right'  %>
-
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td> <%= order.menu.name %> </td>
+            <td> $<%= order.price %></td>
+            <td> <%= order.quantity %> </td>
+            <td> $<%= order.menu.price * order.quantity %></td>
+            <th scope="row">
+              <%= link_to order_path(order), method: "delete", class: "btn btn-danger" do %>
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              <% end %>
+            </th>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr class="table bg-light">
+          <td colspan="4"><strong>Total de la compra:</strong></td>
+          <td><strong>$<%= @total %></strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  <div class="row">
+    <div class="col-sm">
+      <%= link_to 'Limpiar carro', clean_orders_path, class: 'btn btn-outline-danger'  %>
+    </div>
+    <div class="col-sm">
+      <%= link_to "Volver", :back, class: 'btn btn-outline-info' %>
+    </div>
+    <div class="col-sm">
+      <%= link_to 'Confirmar compra', "#", class: 'btn btn-outline-success'  %>
+    </div>
+  </div>
   <% else %>
-    <p>No tienes productos en tu carro de compra.</p>
+    <div class="row jumbotron mt-5">
+      <div class="col-md-12">
+          <p>No tienes productos en tu carro de compra.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= link_to "Volver", root_path, class: 'btn btn-outline-info' %>
+      </div>
+    </div>
   <% end %>
-
 </section>

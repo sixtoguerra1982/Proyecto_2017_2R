@@ -1,0 +1,5 @@
+$("#order_price").text("<%= number_to_currency(@total, separator: ',', delimiter: '.', precision: 0) %>");
+var noticia = "<%= @notice %>";
+if (noticia != ""){
+    alert("<%= @notice %>");
+  }
