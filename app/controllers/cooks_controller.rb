@@ -8,6 +8,12 @@ class CooksController < ApplicationController
 	def show
 	  	@menus = @cook.menus
 			@comment = Comment.new
+      # suma de ordenes
+			if user_signed_in?
+				@orders = current_user.orders.where("date = ?", Date.today)
+	    	@total = @orders.pluck("price * quantity").sum()
+			end	
+      #
 	end
 
 	def edit

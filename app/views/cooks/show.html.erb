@@ -3,13 +3,16 @@
 
 <section class="container pt-5">
 	<!--  TOTAL DE ORDEN -->
-	<div class="row">
-		<div class="offset-md-8 col-md-4">
-			<div class="score">
-				<p>$1.500</p>
+	<% if user_signed_in? %>
+		<div class="row">
+			<div class="offset-md-8 col-md-4">
+				<div class="score">
+					<p id="order_price"><%= number_to_currency(@total, separator: ',', delimiter: '.', precision: 0) %></p>
+					<%= link_to "Carro de Compra", orders_path, class: "btn btn-success" %>
+				</div>
 			</div>
 		</div>
-	</div>
+	<% end %>
 	<!--  *************************-->
 	<!-- Datos cocinero -->
 	<div class="row jumbotron">
@@ -35,7 +38,7 @@
 									<h6><%= menu.name %></h6>
 									<p><%= "$ " + menu.price.to_s %><p>
 									<p class="card-text"><%= menu.description %></p>
-									<%= link_to "Reservar",  menu_orders_path(menu), method: :post, class: "btn btn-success" %>
+									<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true, class: "btn btn-success" %>
 								</div>
 							</div>
 						</div>
