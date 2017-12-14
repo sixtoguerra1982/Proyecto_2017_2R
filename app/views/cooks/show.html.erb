@@ -12,14 +12,8 @@
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
 	<% end %>
-	<!--  *************************-->
-=======
-	</div>
 
-
->>>>>>> 71c66e603b2e28beb247e5aa05ad30f492c6009a
 	<!-- Datos cocinero -->
 	<div class="row jumbotron">
 		<div class="col-12 col-sm-12 col-md-4">
@@ -52,10 +46,8 @@
 									<div class="card-body">
 									<h6><%= menu.name[0,30] %></h6>
 									<p><%= "$ " + menu.price.to_s %><p>
-<<<<<<< HEAD
 									<p class="card-text"><%= menu.description %></p>
 									<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true, class: "btn btn-success" %>
-=======
 										<a class="btn btn-outline-primary" data-toggle="collapse"
 											 href="#collapseDescription<%= menu.id %>"
 											 aria-expanded="false" aria-controls="collapseExample">
@@ -65,7 +57,6 @@
 											<p class="card-text"><%= menu.description[0,30] %></p>
 										</div>
 									<%= link_to "Reservar",  menu_orders_path(menu), method: :post, class: "btn btn-success" %>
->>>>>>> 71c66e603b2e28beb247e5aa05ad30f492c6009a
 								</div>
 							</div>
 					</div>
