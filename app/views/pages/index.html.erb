@@ -51,10 +51,16 @@
       <div class="card mt-3">
         <%= image_tag cook.picture, class: 'card-img-top img-fluid' %>
         <div class="card-body">
-          <h4 class="card-title"><%= cook.name%></h4>
-          <p class="card-text"><%= cook.biography %></p>
-          <p> <%= cook.address_commune %></p>
-          <p> <%= cook.address_region %></p>
+          <a class="btn btn-default" data-toggle="collapse"
+    				 href="#collapseBiography<%= cook.id %>"
+    				 aria-expanded="false" aria-controls="collapseExample">
+    				 <h5 class="card-title"><%= cook.name[0,25]%> <i class="fa fa-caret-down" aria-hidden="true"></i></h5>
+          </a>
+          <div class="collapse" id="collapseBiography<%= cook.id %>">
+    				<p><%= cook.biography[0,100] %></p>
+    			</div>
+          <p> <%= cook.address_commune[0,20] %></p>
+          <p> <%= cook.address_region[0,20] %></p>
         </div>
         <div class="card-footer d-flex flex-row justify-content-center">
           <%= link_to("Ver menú", cook_path(cook), class:"btn btn-outline-primary mr-2" ) %>
