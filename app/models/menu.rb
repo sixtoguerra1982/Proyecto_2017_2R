@@ -14,6 +14,6 @@ class Menu < ApplicationRecord
   end
 
   validates :name, length: { maximum: 30 }
-  validates :description, length: { maximum: 300 }
+  validates :description, length: { maximum: 30 }
   validates :price, length: { maximum: 5 }
 end
