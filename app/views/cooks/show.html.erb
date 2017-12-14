@@ -46,17 +46,18 @@
 									<div class="card-body">
 									<h6><%= menu.name[0,30] %></h6>
 									<p><%= "$ " + menu.price.to_s %><p>
-									<p class="card-text"><%= menu.description %></p>
+						
+									<a class="btn btn-outline-primary" data-toggle="collapse"
+										 href="#collapseDescription<%= menu.id %>"
+										 aria-expanded="false" aria-controls="collapseExample">
+										 Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
+									</a>
+									<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
+										<p class="card-text"><%= menu.description[0,30] %></p>
+									</div>
+
 									<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true, class: "btn btn-success" %>
-										<a class="btn btn-outline-primary" data-toggle="collapse"
-											 href="#collapseDescription<%= menu.id %>"
-											 aria-expanded="false" aria-controls="collapseExample">
-											 Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
-										</a>
-										<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
-											<p class="card-text"><%= menu.description[0,30] %></p>
-										</div>
-									<%= link_to "Reservar",  menu_orders_path(menu), method: :post, class: "btn btn-success" %>
+
 								</div>
 							</div>
 					</div>

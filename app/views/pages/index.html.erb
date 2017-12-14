@@ -51,14 +51,27 @@
       <div class="card mt-3">
         <%= image_tag cook.picture, class: 'card-img-top img-fluid' %>
         <div class="card-body">
-          <a class="btn btn-default" data-toggle="collapse"
+
+          <!-- <a class="btn btn-default" data-toggle="collapse"
     				 href="#collapseBiography<%= cook.id %>"
     				 aria-expanded="false" aria-controls="collapseExample">
     				 <h5 class="card-title"><%= cook.name[0,25]%> <i class="fa fa-caret-down" aria-hidden="true"></i></h5>
           </a>
+
           <div class="collapse" id="collapseBiography<%= cook.id %>">
     				<p><%= cook.biography[0,100] %></p>
-    			</div>
+    			</div> -->
+
+          <a class="btn btn-outline-primary" data-toggle="collapse"
+             href="#collapseDescription<%=cook.id%>"
+             aria-expanded="false" aria-controls="collapseExample">
+             Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </a>
+          <div class="collapse mb-3" id="collapseDescription<%=cook.id%>">
+            <p class="card-text"><%= cook.biography[0,100] %></p>
+          </div>
+
+
           <p> <%= cook.address_commune[0,20] %></p>
           <p> <%= cook.address_region[0,20] %></p>
         </div>
