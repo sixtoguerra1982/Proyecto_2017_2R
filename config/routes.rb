@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :update, :destroy, :show]
   end
 
-  resources :orders, only: :index do
+  resources :orders, only: [:index, :destroy] do
     collection do
       get 'clean'
     end

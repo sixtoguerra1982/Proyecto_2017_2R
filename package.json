@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "bootstrap4-datetimepicker": "^5.2.3",
+    "datatables.net-bs4": "^1.10.16",
     "raty-js": "^2.8.0"
   }
 }

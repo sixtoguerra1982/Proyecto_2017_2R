@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   def index
     @orders = current_user.orders
     @total = @orders.pluck("price * quantity").sum()
-    @cook = Menu.find(@orders.first.menu_id).cook unless @orders.nil?
+    @cook = Menu.find(@orders.first.menu_id).cook if @orders.count > 0
   end
 
   def create
@@ -36,6 +36,15 @@ class OrdersController < ApplicationController
     @orders = Order.where(user: current_user, payed: false)
     @orders.destroy_all
     redirect_to orders_path, notice: 'El carro se ha vaciado.'
+  end
+
+  def destroy
+    @order = Order.find(params[:id])
+    @order.destroy
+    respond_to do |format|
+      format.html { redirect_to orders_path, notice: 'La orden ha sido Eliminado !!!' }
+      format.json { head :no_content }
+    end
   end
 
   private
