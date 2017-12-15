@@ -12,34 +12,34 @@ class MenusController < ApplicationController
      @fecha = Date.today
      if params[:query] == "all"
        # query stream todos los menus
-       @menus = @cook.first.menus.order(date: :desc).order(:name)
+       @menus = @cook.menus.order(date: :desc).order(:name)
      else
        case params[:format]
          when 'left'
            # los dias dirente a hoy
-           @menus = @cook.first.menus.where("menus.date != ?", Date.today).order(date: :asc).order(:name)
+           @menus = @cook.menus.where("menus.date != ?", Date.today).order(date: :asc).order(:name)
            @fecha = Date.today - 1.days
          when 'to_day'
            # OK hoy
-           @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
+           @menus = @cook.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
          when 'right'
            # dias igual a hoy y stock cero
-           @menus = @cook.first.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(:name)
+           @menus = @cook.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(:name)
          else
            if params[:datetimep1].present?
              str = params[:datetimep1]
-             @menus = @cook.first.menus.where("menus.date = ?", str.to_date).order(:name)
+             @menus = @cook.menus.where("menus.date = ?", str.to_date).order(:name)
            else
              if params[:foco].present?
                # edicion de stock y posicion de autofocus
                @menu = Menu.find(params[:foco])
                if @menu.stock > 0
-                 @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
+                 @menus = @cook.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
                else
-                 @menus = @cook.first.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(:name)
+                 @menus = @cook.menus.where("menus.date = ? and menus.stock = 0", Date.today).order(:name)
                end
              else
-               @menus = @cook.first.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
+               @menus = @cook.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(stock: :desc).order(:name)
             end
           end
        end
@@ -48,7 +48,7 @@ class MenusController < ApplicationController
 
 
   def carousel
-    @menus = @cook.first.menus.order(:name)
+    @menus = @cook.menus.order(:name)
   end
   # GET /menus/new
   def new
@@ -62,8 +62,9 @@ class MenusController < ApplicationController
   # POST /menus
   # POST /menus.json
   def create
+    @menus = Menu.where(cook_id: @cook.id)
     @menu = Menu.new(menu_params)
-    @menu.cook_id = @cook.ids.first
+    @menu.cook_id = @cook.id
     respond_to do |format|
       if @menu.save
         format.html { redirect_to new_menu_path, notice: 'El Menú fue creado' }
@@ -128,7 +129,7 @@ class MenusController < ApplicationController
     end
 
     def set_cook
-      @cook = Cook.where(user_id: current_user.id)
+      @cook = Cook.find_by(user_id: current_user.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

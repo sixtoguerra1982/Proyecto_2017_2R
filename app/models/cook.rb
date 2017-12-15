@@ -6,7 +6,7 @@ class Cook < ApplicationRecord
 
   validates :name, length: { maximum: 35 }
   validates :email, length: { maximum: 40 }
-  validates :phone, length: { maximum: 12 }
+  validates :phone, length: { maximum: 15 }
   validates :address, length: { maximum: 60 }
   validates :address_region, length: { maximum: 40 }
   validates :address_commune, length: { maximum: 40 }

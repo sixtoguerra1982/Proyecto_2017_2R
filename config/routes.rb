@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     :omniauth_callbacks => "users/omniauth_callbacks"
   }
 
-   resources :menus, only: [:index, :new, :edit, :update, :create, :destroy] do
+   resources :menus, except: [:show] do
      collection do
        get 'carousel'
      end

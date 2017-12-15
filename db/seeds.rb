@@ -52,10 +52,10 @@ cont = 1
 2.times do |x|
   3.times do |i|
     Cook.create(
-      name: Faker::Name.name_with_middle,
+      name: (Faker::Name.name_with_middle)[0,35],
       email: 'cook01@gmail.com',
       phone: "56 9 8978675#{i + 1}",
-      address: Faker::Address.street_address + " " + Faker::Address.secondary_address,
+      address: (Faker::Address.street_address + " " + Faker::Address.secondary_address)[0,60],
       address_region: Faker::Address.state,
       address_commune: Faker::Address.community,
       address_city: Faker::Address.city,
