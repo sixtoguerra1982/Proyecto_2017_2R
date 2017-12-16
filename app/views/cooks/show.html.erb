@@ -46,7 +46,7 @@
 									<div class="card-body">
 									<h6><%= menu.name[0,30] %></h6>
 									<p><%= "$ " + menu.price.to_s %><p>
-						
+
 									<a class="btn btn-outline-primary" data-toggle="collapse"
 										 href="#collapseDescription<%= menu.id %>"
 										 aria-expanded="false" aria-controls="collapseExample">
@@ -56,7 +56,12 @@
 										<p class="card-text"><%= menu.description[0,30] %></p>
 									</div>
 
-									<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true, class: "btn btn-success" %>
+
+									<% if user_signed_in? %>
+										<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true, class: "btn btn-success" %>
+									<% else %>
+										<%= link_to "Comprar", new_user_session_path, class: "btn btn-success" %>
+									<% end %>
 
 								</div>
 							</div>

@@ -1,14 +1,13 @@
 <%= render 'shared/navbarmenus' %>
 <% unless @cook.nil? %>
   <div class="jumbotron mt-5">
+    <h3>Bienvenido: <%=@cook.name%></h3>
     <div class="row" style="text-align: center;">
-      <div class="col mt-4">
-        <h3>Bienvenido: <a href="<%= edit_cook_path(@cook) %>"><%=@cook.name%></a></h3>
-      </div>
-      <!--  Editar datos-->
+
+      <!--  Editar -->
       <div class="col">
         <a href="<%= edit_cook_path(@cook) %>">
-            <i class="fa fa-user-circle fa-5x" aria-hidden="true"></i>
+          <i class="fa fa-pencil fa-5x" aria-hidden="true"></i>
         </a>
       </div>
       <!--  Ver show -->
@@ -56,6 +55,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
+      <div class="badge badge-warning">
+        <strong style="color:white;">Publicados Anteriormente</strong>
+      </div>
       <a href="<%= menus_path('left') %>">
         <div class="btn btn-warning btn-block">
           <i class="fa fa-arrow-circle-o-left active" aria-hidden="true" style="color:white;"></i>
@@ -63,6 +65,9 @@
       </a>
     </div>
     <div class="col-sm-4">
+      <div class="badge badge-info">
+        <strong>Publicar Hoy <%= Date.today.strftime('%d/%m/%Y') %> </strong>
+      </div>
       <a href="<%=  menus_path('to_day')%>">
         <div class="btn btn-outline-primary btn-block">
           <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
@@ -70,6 +75,9 @@
       </a>
     </div>
     <div class="col-sm-4">
+      <div class="badge badge-danger">
+        <strong>Sin Stock               </strong>
+      </div>
       <a href="<%=  menus_path('right')%>">
         <div class="btn btn-danger btn-block">
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -78,7 +86,8 @@
     </div>
   </div>
 </div>
-<!---ARROWS----->
+<!-------->
+
 <!-- TARJETAS DE STOCK -->
 <div class="container" id ="list_menu">
   <%= render 'list_menu', menus: @menus %>

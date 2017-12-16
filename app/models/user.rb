@@ -10,9 +10,10 @@ class User < ApplicationRecord
 
   has_many :cooks
   has_many :orders
-  has_many :menus, through: :orders
-  has_many :menus, through: :cooks
   has_many :comments, dependent: :destroy
+
+  has_many :menus, through: :cooks
+
 
   enum role: [:visit, :admin, :cook]
 

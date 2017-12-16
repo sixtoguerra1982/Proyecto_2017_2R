@@ -12,7 +12,7 @@ class CooksController < ApplicationController
 			if user_signed_in?
 				@orders = current_user.orders.where("date = ?", Date.today)
 	    	@total = @orders.pluck("price * quantity").sum()
-			end	
+			end
       #
 	end
 

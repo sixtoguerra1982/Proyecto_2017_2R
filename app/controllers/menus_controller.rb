@@ -80,9 +80,6 @@ class MenusController < ApplicationController
   # PATCH/PUT /menus/1.json
   def update
     respond_to do |format|
-      if params[:commit] == "EDITAR"
-        # @menu.stock = 0 si la fecha nueva es diferente
-      end
       if @menu.update(menu_params)
         if params[:commit] == "GUARDAR"
           format.html { redirect_to menus_path(:foco => @menu.id), notice: 'El Menú fue actualizado' }
@@ -131,14 +128,11 @@ class MenusController < ApplicationController
     def set_cook
       @cook = Cook.find_by(user_id: current_user.id)
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
       params.require(:menu).permit(:name, :description, :picture, :price, :date, :stock)
     end
-
     #check role segun enum role: [:visit, :admin, :cook]
-
     def check_role
       if current_user.cook? == false
         redirect_to root_path
