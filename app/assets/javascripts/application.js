@@ -12,15 +12,10 @@
 //
 
 
-//= require jquery3
+//= require jquery/dist/jquery
 //= require popper
 //= require bootstrap-sprockets
-//= require rails-ujs
-//= require turbolinks
-
-//= require jquery/dist/jquery
 //= require raty-js/lib/jquery.raty
-//= require smooth-scroll/dist/js/smooth-scroll
 //= require tether/dist/js/tether.js
 //= require moment/moment.js
 //= require bootstrap/dist/js/bootstrap.js
@@ -29,5 +24,6 @@
 
 //= require datatables.net/js/jquery.dataTables.js
 //= require datatables.net-bs4/js/dataTables.bootstrap4.js
-
+//= require rails-ujs
+//= require turbolinks
 //= require_tree .

@@ -36,7 +36,7 @@
       <h1 class="display-3 text-center">La tía.cl!</h1>
       <p class="lead text-white text-center">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
       <p class="lead d-flex flex-row justify-content-center">
-        <a data-scroll href="#cocineros" role="button" class="btn btn-primary btn-lg">Ver cocineros</a>
+        <a href="#cocineros" role="button" class="btn btn-primary btn-lg">Ver cocineros</a>
       </p>
     </div>
   </div>
@@ -62,20 +62,11 @@
     				<p><%= cook.biography[0,100] %></p>
     			</div> -->
 
-          <a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseDescription<%=cook.id%>"
+          <a class="btn btn-outline-default" data-toggle="collapse" href="#collapseDescription<%=cook.id%>"
             aria-expanded="false" aria-controls="collapseExample"><%= cook.name[0,25] %>
             <i class="fa fa-caret-down" aria-hidden="true"></i>
           </a>
           <div class="collapse mb-3" id="collapseDescription<%=cook.id%>">
-            <p class="card-text"><%= cook.biography[0,100] %></p>
-          </div>
-
-          <a class="btn btn-outline-primary" data-toggle="collapse"
-             href="#collapseDescription<%= cook.id %>"
-             aria-expanded="false" aria-controls="collapseExample">
-             Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
-          </a>
-          <div class="collapse mb-3" id="collapseDescription<%= cook.id %>">
             <p class="card-text"><%= cook.biography[0,100] %></p>
           </div>
 
@@ -91,10 +82,3 @@
   </div>
 </section>
 <!-- Fin Cards -->
-
-<!-- SmoothScroll -->
-<script>
-  var scroll = new SmoothScroll('a[href*="#"]',{
-  });
-</script>
-<!-- Fin SmoothScroll -->
