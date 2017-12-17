@@ -48,8 +48,8 @@
   <div class="row">
     <% @cooks.each do |cook| %>
     <div class="col-12 col-sm-12 col-md-6 col-lg-4">
-      <div class="card mt-3">
-        <%= image_tag cook.picture, class: 'card-img-top img-fluid' %>
+      <div class="card mt-3" style="width: 20rem;">
+        <%= image_tag cook.picture, class: 'card-img-top img-fluid', id: 'imagen-portada' %>
         <div class="card-body">
           <a class="btn btn-outline-default font-2" data-toggle="collapse" href="#collapseDescription<%=cook.id%>"
             aria-expanded="false" aria-controls="collapseExample"><%= cook.name[0,25] %>
@@ -58,7 +58,6 @@
           <div class="collapse mb-3" id="collapseDescription<%=cook.id%>">
             <p class="card-text font-2"><%= cook.biography[0,100] %></p>
           </div>
-
           <p> <%= cook.address_commune[0,20] %></p>
           <p> <%= cook.address_region[0,20] %></p>
         </div>

@@ -46,15 +46,15 @@
 									<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
 									<div class="card-body">
 									<h6 class="font-2"><%= menu.name[0,30] %></h6>
-									<p class="font-1"><%= "$ " + menu.price.to_s %><p>
+									<p class="font-1"><%= number_to_currency(menu.price.to_s, separator: ',', delimiter: '.', precision: 0) %><p>
 
 									<a class="btn btn-outline-primary font-1" data-toggle="collapse"
 										 href="#collapseDescription<%= menu.id %>"
 										 aria-expanded="false" aria-controls="collapseExample">
-										 Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
+										 <%= menu.description[0,15] %>... <i class="fa fa-caret-down" aria-hidden="true"></i>
 									</a>
 									<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
-										<p class="card-text font-2"><%= menu.description[0,30] %></p>
+										<p class="card-text font-2"><%= menu.description[0,350] %></p>
 									</div>
 									<% if user_signed_in? %>
 										<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true,
