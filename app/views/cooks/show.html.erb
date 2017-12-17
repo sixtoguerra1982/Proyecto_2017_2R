@@ -1,18 +1,6 @@
 <!-- menú de navegación -->
 <%= render 'shared/navbar' %>
 
-	<!--  TOTAL DE ORDEN -->
-	<% if user_signed_in? %>
-		<div class="row">
-			<div class="offset-md-8 col-md-4">
-				<div class="score">
-					<p id="order_price"><%= number_to_currency(@total, separator: ',', delimiter: '.', precision: 0) %></p>
-					<%= link_to "Carro de Compra", orders_path, class: "btn btn-success" %>
-				</div>
-			</div>
-		</div>
-	<% end %>
-
 	<!-- Datos cocinero -->
 	<div class="row jumbotron jumbotron-img">
 			<div class="col-12 col-sm-12 col-md-4 avatar-img mt-5">
@@ -20,7 +8,7 @@
 			</div>
 			<div class="col-12 col-sm-12 col-md-8 mt-5">
 				<h5 class="font-2 text-white"><%= @cook.name[0,30] %></h5>
-				<a class="btn btn-outline-primary font-1 text-white border-white" data-toggle="collapse"
+				<a class="btn btn-primary font-1" data-toggle="collapse"
 					 href="#collapseBiography<%= @cook.id %>"
 					 aria-expanded="false" aria-controls="collapseExample">
 					 Mi trabajo <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -32,8 +20,8 @@
 				</div>
 			</div>
 	</div>
-
-<section class="container pt-5">
+	
+<section class="container">
 	<div class="row">
 		<!-- Listado menú -->
 		<div class="menus col-12 col-sm-12 col-md-8 col-lg-8">
