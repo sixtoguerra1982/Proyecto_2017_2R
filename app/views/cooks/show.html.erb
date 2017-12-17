@@ -1,37 +1,24 @@
 <!-- menú de navegación -->
 <%= render 'shared/navbar' %>
 
-<section class="container pt-5">
-	<!--  TOTAL DE ORDEN -->
-	<% if user_signed_in? %>
-		<div class="row">
-			<div class="offset-md-8 col-md-4">
-				<div class="score">
-					<p id="order_price"><%= number_to_currency(@total, separator: ',', delimiter: '.', precision: 0) %></p>
-					<%= link_to "Carro de Compra", orders_path, class: "btn btn-success" %>
-				</div>
-			</div>
-		</div>
-	<% end %>
-
 	<!-- Datos cocinero -->
-	<div class="row jumbotron">
-		<div class="col-12 col-sm-12 col-md-4">
-			<%= image_tag @cook.picture, size:"32X32", class: 'card-img-top img-fluid' %>
-		</div>
-		<div class="col-12 col-sm-12 col-md-8">
-			<h5 class="font-2"><%= @cook.name[0,30] %></h5>
-			<a class="btn btn-outline-primary font-1" data-toggle="collapse"
-				 href="#collapseBiography<%= @cook.id %>"
-				 aria-expanded="false" aria-controls="collapseExample">
-				 Mi trabajo <i class="fa fa-angle-down" aria-hidden="true"></i>
-			</a>
-			<div class="collapse" id="collapseBiography<%= @cook.id %>">
-				<div class="card card-body">
-					<p class="font-2"><%= @cook.biography[0,350] %></p>
+	<div class="row jumbotron jumbotron-img">
+			<div class="col-12 col-sm-12 col-md-4 avatar-img mt-5">
+				<%= image_tag @cook.picture, class: 'img-fluid rounded mx-auto d-block' %>
+			</div>
+			<div class="col-12 col-sm-12 col-md-8 mt-5">
+				<h5 class="font-2 text-white"><%= @cook.name[0,30] %></h5>
+				<a class="btn btn-primary font-1" data-toggle="collapse"
+					 href="#collapseBiography<%= @cook.id %>"
+					 aria-expanded="false" aria-controls="collapseExample">
+					 Mi trabajo <i class="fa fa-angle-down" aria-hidden="true"></i>
+				</a>
+				<div class="collapse" id="collapseBiography<%= @cook.id %>">
+					<div class="card card-body">
+						<p class="font-2"><%= @cook.biography[0,350] %></p>
+					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 
 
@@ -51,7 +38,7 @@
 									<a class="btn btn-outline-primary font-1" data-toggle="collapse"
 										 href="#collapseDescription<%= menu.id %>"
 										 aria-expanded="false" aria-controls="collapseExample">
-										 <%= menu.description[0,15] %>... <i class="fa fa-caret-down" aria-hidden="true"></i>
+										 Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
 									</a>
 									<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
 										<p class="card-text font-2"><%= menu.description[0,350] %></p>
