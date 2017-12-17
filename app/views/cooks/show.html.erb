@@ -34,6 +34,7 @@
 		</div>
 	</div>
 
+
 	<div class="row">
 		<!-- Listado menú -->
 		<div class="menus col-12 col-sm-12 col-md-8 col-lg-8">
@@ -55,14 +56,13 @@
 									<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
 										<p class="card-text"><%= menu.description[0,30] %></p>
 									</div>
-
-
 									<% if user_signed_in? %>
-										<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true, class: "btn btn-success" %>
+										<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true,
+										data: {disable_with: "<i class='fa fa-refresh fa-spin' aria-hidden='true'></i>"},
+										class: "btn btn-success" %>
 									<% else %>
 										<%= link_to "Comprar", new_user_session_path, class: "btn btn-success" %>
 									<% end %>
-
 								</div>
 							</div>
 					</div>

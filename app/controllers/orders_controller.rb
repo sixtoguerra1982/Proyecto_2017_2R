@@ -1,34 +1,40 @@
 class OrdersController < ApplicationController
-
   before_action :authenticate_user!
-  before_action :set_order
+  before_action :set_orders, only: [:index, :create, :to_buy]
 
   def index
-    @orders = current_user.orders
     @total = @orders.pluck("price * quantity").sum()
     @cook = Menu.find(@orders.first.menu_id).cook if @orders.count > 0
   end
 
   def create
+
     @menu = Menu.find(params[:menu_id]) #Menu seleccionado
     id_cook_seleccionado = @menu.cook.id #id menu_seleccionado
+
     @order = Order.where(user: current_user, payed: false, date: Date.today).first
     unless @order.nil?
       id_cook_seleccionado_order = Menu.find(@order.menu_id).cook.id
     end
     if id_cook_seleccionado_order == id_cook_seleccionado or @order.nil?
-      @order = Order.new(menu: @menu, user: current_user,
-                        price: @menu.price, date: Date.today,
-                        request_description: @menu.name)
-      @order.quantity = 1
-      @order.save
+
+      m = @menu.orders.where(user_id: current_user, payed: false , date: Date.today).count
+
+      if m > 0
+         o = Order.where(user: current_user, payed: false, date: Date.today, menu_id: @menu.id).first
+         o.quantity = o.quantity + 1
+         o.save
+      else
+        @order = Order.new(menu: @menu, user: current_user,
+                          price: @menu.price, date: Date.today,
+                          request_description: @menu.name)
+        @order.quantity = 1
+        @order.save
+      end
     else
       @notice = "Tiene una orden pendiente con otro cocinero !!!!"
     end
-    # end
-    #
     # suma de ordenes
-    @orders = current_user.orders.where("date = ?", Date.today)
     @total = @orders.pluck("price * quantity").sum()
   end
 
@@ -47,8 +53,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def to_buy
+    @total = @orders.pluck("price * quantity").sum()
+  end
+
   private
-    def set_order
-      @order
+    def set_orders
+      @orders = current_user.orders.where(payed: false, date: Date.today)
     end
 end

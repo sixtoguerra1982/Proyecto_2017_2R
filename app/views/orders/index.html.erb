@@ -1,27 +1,33 @@
 <%= render 'shared/navbar' %>
-<!-- Datos cocinero -->
-
-<% unless @cook.nil? %>
-  <div class="row jumbotron mt-5">
-    <div class="col-12 col-sm-12 col-md-4">
-      <%= image_tag @cook.picture, size:"32X32", class: 'card-img-top img-fluid' %>
-    </div>
-    <div class="col-12 col-sm-12 col-md-8">
-      <h5><%= @cook.name %></h5>
-      <p><%= @cook.biography %></p>
-    </div>
-  </div>
-<% end %>
-<!-- _________ -->
-
-<section class="container">
+<section class="container formulario_menu mt-5">
+  <!-- Datos cocinero -->
+  <% unless @cook.nil? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <td><div class="badge badge-info">Cocinero:</div> <%= @cook.name %> </td>
+        <td rowspan="2"><%= image_tag current_user.picture.thumb, size:"70x70", class: "rounded mx-auto d-block" %></td>
+        <td><div class="badge badge-info">Telefono:</div> <%= @cook.phone %></td>
+      </tr>
+      <tr>
+        <td><div class="badge badge-info">E-Mail:</div> <%= @cook.email %></td> <td><div class="badge badge-info">Dirección:</div> <%= @cook.address %></td>
+      </tr>
+      <tr>
+        <td align="center"><%= @cook.address_region %></td>
+        <td align="center"><%= @cook.address_city %></td>
+        <td align="center"><%= @cook.address_commune %></td>
+      </tr>
+    </thead>
+  </table>
+  <% end %>
+  <!-- _________ -->
   <% if @orders.count > 0 %>
     <table class="table table-striped" id="myTable">
       <thead>
         <tr>
           <th>Menú</th>
-          <th>Valor</th>
           <th>Cantidad</th>
+          <th>Valor</th>
           <th>Subtotal</th>
           <th></th>
         </tr>
@@ -30,11 +36,11 @@
         <% @orders.each do |order| %>
           <tr>
             <td> <%= order.menu.name %> </td>
-            <td> $<%= order.price %></td>
-            <td> <%= order.quantity %> </td>
-            <td> $<%= order.menu.price * order.quantity %></td>
+            <td align="right"> <%= order.quantity %> </td>
+            <td align="right"> <%= number_to_currency(order.price, separator: ',', delimiter: '.', precision: 0) %></td>
+            <td align="right"> <%= number_to_currency(order.menu.price * order.quantity, separator: ',', delimiter: '.', precision: 0) %></td>
             <th scope="row">
-              <%= link_to order_path(order), method: "delete", class: "btn btn-danger" do %>
+              <%= link_to order_path(order), method: "delete", class: "btn btn-danger d-block" do %>
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
               <% end %>
             </th>
@@ -44,21 +50,23 @@
       <tfoot>
         <tr class="table bg-light">
           <td colspan="4"><strong>Total de la compra:</strong></td>
-          <td><strong>$<%= @total %></strong></td>
+          <td align="right"><strong><%= number_to_currency(@total , separator: ',', delimiter: '.', precision: 0) %></strong></td>
         </tr>
       </tfoot>
     </table>
-  <div class="row">
-    <div class="col-sm">
-      <%= link_to 'Limpiar carro', clean_orders_path, class: 'btn btn-outline-danger'  %>
+    <div class="mt-3 row">
+      <div class="offset-sm-1 col-sm-3">
+        <%= link_to 'Limpiar carro', clean_orders_path, class: 'btn btn-outline-danger'  %>
+      </div>
+      <% unless @cook.nil? %>
+        <div class="offset-sm-1 col-sm-3">
+          <%= link_to "Volver", cook_path(@cook), class: 'btn btn-outline-info' %>
+        </div>
+      <% end %>
+      <div class="offset-sm-1 col-sm-3">
+        <%= link_to 'Confirmar compra', to_buy_orders_path, class: 'btn btn-outline-success'  %>
+      </div>
     </div>
-    <div class="col-sm">
-      <%= link_to "Volver", :back, class: 'btn btn-outline-info' %>
-    </div>
-    <div class="col-sm">
-      <%= link_to 'Confirmar compra', "#", class: 'btn btn-outline-success'  %>
-    </div>
-  </div>
   <% else %>
     <div class="row jumbotron mt-5">
       <div class="col-md-12">

@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     collection do
       get 'clean'
     end
+    collection do
+      get 'to_buy'
+    end
   end
 
   root to: 'pages#index'

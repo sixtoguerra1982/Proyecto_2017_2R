@@ -56,9 +56,9 @@ cont = 1
       email: 'cook01@gmail.com',
       phone: "56 9 8978675#{i + 1}",
       address: (Faker::Address.street_address + " " + Faker::Address.secondary_address)[0,60],
-      address_region: Faker::Address.state,
-      address_commune: Faker::Address.community,
-      address_city: Faker::Address.city,
+      address_region: (Faker::Address.state)[0,40],
+      address_commune: (Faker::Address.community)[0,40],
+      address_city: (Faker::Address.city)[0,40],
       picture: "cook_default.jpg",
       biography: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
       vedent, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -73,10 +73,9 @@ end
 3.times do |x|
   10.times do |i|
     Menu.create(
-      name:Faker::Food.dish,
+      name:(Faker::Food.dish)[0,30],
       description: Faker::Food.ingredient,
       price:Faker::Commerce.price.to_i * 100,
-      # picture: "http://lorempixel.com/400/200/food/#{i + 1}/",
       picture: "default_menu.png",
       cook_id: x + 1,
       date: Time.now
@@ -84,4 +83,6 @@ end
   end
 end
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'administrador@latia.cl', password: 'admin1234', password_confirmation: 'admin1234') if Rails.env.development?
+
+Menu.create(name:(Faker::Food.dish)[0,30],description: Faker::Food.ingredient,price:Faker::Commerce.price.to_i * 100,picture: "default_menu.png",cook_id: 1, date: Time.now)
