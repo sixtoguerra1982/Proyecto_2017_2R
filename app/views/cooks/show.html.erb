@@ -20,15 +20,15 @@
 			<%= image_tag @cook.picture, size:"32X32", class: 'card-img-top img-fluid' %>
 		</div>
 		<div class="col-12 col-sm-12 col-md-8">
-			<h5><%= @cook.name[0,30] %></h5>
-			<a class="btn btn-outline-primary" data-toggle="collapse"
+			<h5 class="font-2"><%= @cook.name[0,30] %></h5>
+			<a class="btn btn-outline-primary font-1" data-toggle="collapse"
 				 href="#collapseBiography<%= @cook.id %>"
 				 aria-expanded="false" aria-controls="collapseExample">
 				 Mi trabajo <i class="fa fa-angle-down" aria-hidden="true"></i>
 			</a>
 			<div class="collapse" id="collapseBiography<%= @cook.id %>">
 				<div class="card card-body">
-					<p><%= @cook.biography[0,350] %></p>
+					<p class="font-2"><%= @cook.biography[0,350] %></p>
 				</div>
 			</div>
 		</div>
@@ -45,23 +45,23 @@
 								<div class="card mt-3">
 									<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
 									<div class="card-body">
-									<h6><%= menu.name[0,30] %></h6>
-									<p><%= "$ " + menu.price.to_s %><p>
+									<h6 class="font-2"><%= menu.name[0,30] %></h6>
+									<p class="font-1"><%= "$ " + menu.price.to_s %><p>
 
-									<a class="btn btn-outline-primary" data-toggle="collapse"
+									<a class="btn btn-outline-primary font-1" data-toggle="collapse"
 										 href="#collapseDescription<%= menu.id %>"
 										 aria-expanded="false" aria-controls="collapseExample">
 										 Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
 									</a>
 									<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
-										<p class="card-text"><%= menu.description[0,30] %></p>
+										<p class="card-text font-2"><%= menu.description[0,30] %></p>
 									</div>
 									<% if user_signed_in? %>
 										<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true,
 										data: {disable_with: "<i class='fa fa-refresh fa-spin' aria-hidden='true'></i>"},
 										class: "btn btn-success" %>
 									<% else %>
-										<%= link_to "Comprar", new_user_session_path, class: "btn btn-success" %>
+										<%= link_to "Comprar", new_user_session_path, class: "btn btn-success font-1" %>
 									<% end %>
 								</div>
 							</div>
@@ -74,12 +74,12 @@
 		<!-- Comentarios -->
 		<div class="cook col-12 col-sm-12 col-md-4 col-lg-4">
 				<div id="comments-box">
-					<h4 class="pt-2">Comentarios</h4>
+					<h4 class="pt-2 font-2">Comentarios</h4>
 					<% @cook.comments.last(8).map do |comment| %>
 					<div class="card">
 						<div class="card-body">
-							<p><%= comment.content[0,30] %></p>
-							<p class="comment-rating" data-score="<%= comment.rating %>"><%= comment.user.name %> - </p>
+							<p class="font-2"><%= comment.content[0,30] %></p>
+							<p class="comment-rating font-1" data-score="<%= comment.rating %>"><%= comment.user.name %> - </p>
 						</div>
 					</div>
 					<% end %>

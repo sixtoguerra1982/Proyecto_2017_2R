@@ -1,26 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand logo-latia" href="<%= root_path %>">
+    <%= image_tag "logo-02.svg", with: "30", height: "30", class: "d-inline-block align-top" %>
+    La tía.cl!
+  </a>
+  <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <div class="navbar-nav mr-auto ml-auto text-center">
-      <a class="nav-item nav-link active" href="<%= root_path %>">Home</a>
-      <a class="nav-item nav-link" href="#">Nosotros</a>
-      <a class="nav-item nav-link" href="#">Contacto</a>
+      <a class="nav-item nav-link active font-1" href="<%= root_path %>">Home</a>
+      <a class="nav-item nav-link font-1" href="#">Nosotros</a>
+      <a class="nav-item nav-link font-1" href="#">Contacto</a>
     </div>
 
     <% if user_signed_in? %>
      <div class="d-flex flex-row justify-content-center">
-       <a class="btn btn-outline-success text-white border-white mr-2" href="<%= orders_path %>">Carro de compra</a>
+       <a class="btn btn-outline-success text-white border-white mr-2 font-1" href="<%= orders_path %>">Carro de compra</a>
        <a href="<%= destroy_user_session_path %>" data-method="DELETE"
-         class="btn btn-outline-primary text-white border-white mr-2">Salir</a>
+         class="btn btn-outline-primary text-white border-white mr-2 font-1">Salir</a>
      </div>
     <% else %>
       <div class="d-flex flex-row justify-content-center">
-        <a href="<%= new_user_session_path %>" class="btn btn-outline-primary text-white border-white mr-2">Ingresar</a>
-        <a href="<%= new_user_registration_path %>" class="btn btn-outline-primary text-white border-white">Registrarse</a>
+        <a href="<%= new_user_session_path %>" class="btn btn-outline-primary text-white border-white mr-2 font-1">Ingresar</a>
+        <a href="<%= new_user_registration_path %>" class="btn btn-outline-primary text-white border-white font-1">Registrarse</a>
       </div>
     <% end %>
   </div>

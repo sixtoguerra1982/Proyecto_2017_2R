@@ -1,18 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
-  <a class="navbar-brand" href="<%= root_path %>">
+  <a class="navbar-brand logo-latia" href="<%= root_path %>">
     <%= image_tag "logo-02.svg", with: "30", height: "30", class: "d-inline-block align-top" %>
     La tía.cl!
   </a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <div class="navbar-nav mr-auto ml-auto text-center">
-      <a class="nav-item nav-link <%= 'active' if params[:action]=='index'%>" href="<%= menus_path %>">Cocinero</a>
+      <a class="nav-item nav-link font-1 <%= 'active' if params[:action]=='index'%>" href="<%= menus_path %>">Cocinero</a>
       <li class="nav-item dropdown">
-        <a class="nav-link <%= 'active' if params[:action] != 'index' %> dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link font-1 <%= 'active' if params[:action] != 'index' %> dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Menús
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -25,14 +25,14 @@
     <% if user_signed_in? %>
 
       <div class="d-flex flex-row justify-content-center">
-          <a href="#" class="nav-item nav-link text-white">Bienvenido</a>
+          <a href="#" class="nav-item nav-link text-white font-1">Bienvenido</a>
 
           <%= image_tag current_user.picture.thumb, class: "d-inline-block align-top avatar" %>
 
 
           <div class="d-flex flex-row justify-content-center">
-          <a href="#" class="nav-item nav-link text-white"><%= current_user.name %></a>
-          <a href="<%= destroy_user_session_path %>" data-method="DELETE" class="btn btn-outline-primary text-white border-white mr-2">Salir</a>
+          <a href="#" class="nav-item nav-link text-white font-1"><%= current_user.name %></a>
+          <a href="<%= destroy_user_session_path %>" data-method="DELETE" class="btn btn-outline-primary text-white border-white mr-2 font-1">Salir</a>
 
       </div>
 

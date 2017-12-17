@@ -23,7 +23,6 @@
 
 body {
 	background-image: linear-gradient(rgb(241, 241, 240));
-	font-family: sans-serif;
 }
 
 .avatar{
@@ -85,4 +84,12 @@ body {
 .label_carausel_link:hover {
 		background-color: #28a745;
 		cursor:default;
+}
+
+.font-1{
+	font-family: 'Quicksand', sans-serif;
+}
+
+.font-2{
+	font-family: 'Roboto', sans-serif;
 }

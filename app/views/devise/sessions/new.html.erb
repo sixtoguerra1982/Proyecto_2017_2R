@@ -2,19 +2,19 @@
 <section class="container mt-5">
   <div class="row justify-content-center pt-3">
     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-      <h4 class="display-5">Iniciar sesión</h4>
+      <h4 class="display-5 font-2">Iniciar sesión</h4>
       <hr class="bg-info">
-      <p class="pb-0 mb-0">Ingresa a tu cuenta.</p>
+      <p class="pb-0 mb-0 font-2">Ingresa a tu cuenta.</p>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="row form-group">
-          <%= f.label :email, "e-mail:", class: "col-form-label col-md-4" %>
+          <%= f.label :email, "e-mail:", class: "col-form-label col-md-4 font-2" %>
           <div class="col-md-8">
             <%= f.email_field :email, class: "form-control", autofocus: true %>
           </div>
         </div>
 
         <div class="row form-group">
-          <%= f.label :password, "Password:", class: "col-form-label col-md-4" %>
+          <%= f.label :password, "Password:", class: "col-form-label col-md-4 font-2" %>
           <div class="col-md-8">
             <%= f.password_field :password, class: "form-control", autocomplete: "off" %>
           </div>
@@ -27,18 +27,16 @@
           </div>
         <% end -%>
 
-        <div class="d-flex flex-row justify-content-center">
-          <div class="actions">
-            <%= f.submit "Ingresar", class: "btn btn-outline-info" %>
+        <div class="d-flex flex-row justify-content-between">
+            <%= f.submit "Ingresar", class: "btn btn-outline-info font-1" %>
             <button class="loginBtn loginBtn--facebook">
               <%= link_to "Ingresar con Facebook", user_facebook_omniauth_authorize_path,
-              class: 'text-white' %>
+              class: 'text-white font-1' %>
             </button>
-          </div>
         </div>
       <% end %>
 
-      <div class="d-flex flex-row justify-content-left">
+      <div class="d-flex flex-row justify-content-left mt-4">
         <p><%= render "devise/shared/links" %></p>
       </div>
     </div>
