@@ -21,63 +21,63 @@
 			</div>
 	</div>
 
+  <div class="container">
+		<div class="row">
+			<!-- Listado menú -->
+			<div class="menus col-12 col-sm-12 col-md-8 col-lg-8">
+				<div class="row">
+					<% @menus.each do |menu|  %>
+						<% if menu.stock > 1 %>
+							<div class="col-12 col-sm-12 col-md-6 col-lg-4">
+									<div class="card mt-3">
+										<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
+										<div class="card-body">
+										<h6 class="font-2"><%= menu.name[0,30] %></h6>
+										<p class="font-1"><%= number_to_currency(menu.price.to_s, separator: ',', delimiter: '.', precision: 0) %><p>
 
-	<div class="row">
-		<!-- Listado menú -->
-		<div class="menus col-12 col-sm-12 col-md-8 col-lg-8">
-			<div class="row">
-				<% @menus.each do |menu|  %>
-					<% if menu.stock > 1 %>
-						<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-								<div class="card mt-3">
-									<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
-									<div class="card-body">
-									<h6 class="font-2"><%= menu.name[0,30] %></h6>
-									<p class="font-1"><%= number_to_currency(menu.price.to_s, separator: ',', delimiter: '.', precision: 0) %><p>
-
-									<a class="btn btn-outline-primary font-1" data-toggle="collapse"
-										 href="#collapseDescription<%= menu.id %>"
-										 aria-expanded="false" aria-controls="collapseExample">
-										 Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
-									</a>
-									<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
-										<p class="card-text font-2"><%= menu.description[0,350] %></p>
+										<a class="btn btn-outline-primary font-1" data-toggle="collapse"
+											 href="#collapseDescription<%= menu.id %>"
+											 aria-expanded="false" aria-controls="collapseExample">
+											 Descripción <i class="fa fa-caret-down" aria-hidden="true"></i>
+										</a>
+										<div class="collapse mb-3" id="collapseDescription<%= menu.id %>">
+											<p class="card-text font-2"><%= menu.description[0,350] %></p>
+										</div>
+										<% if user_signed_in? %>
+											<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true,
+											data: {disable_with: "<i class='fa fa-refresh fa-spin' aria-hidden='true'></i>"},
+											class: "btn btn-success" %>
+										<% else %>
+											<%= link_to "Comprar", new_user_session_path, class: "btn btn-success font-1" %>
+										<% end %>
 									</div>
-									<% if user_signed_in? %>
-										<%= link_to "Comprar", menu_orders_path(menu), method: :post, remote: true,
-										data: {disable_with: "<i class='fa fa-refresh fa-spin' aria-hidden='true'></i>"},
-										class: "btn btn-success" %>
-									<% else %>
-										<%= link_to "Comprar", new_user_session_path, class: "btn btn-success font-1" %>
-									<% end %>
 								</div>
-							</div>
-					</div>
+						</div>
+					<% end %>
 				<% end %>
-			<% end %>
+				</div>
+			</div>
+
+			<!-- Comentarios -->
+			<div class="cook col-12 col-sm-12 col-md-4 col-lg-4">
+					<div id="comments-box">
+						<h4 class="pt-2 font-2">Comentarios</h4>
+						<% @cook.comments.last(8).map do |comment| %>
+						<div class="card">
+							<div class="card-body">
+								<p class="font-2"><%= comment.content[0,30] %></p>
+								<p class="comment-rating font-1" data-score="<%= comment.rating %>"><%= comment.user.name %> - </p>
+							</div>
+						</div>
+						<% end %>
+					</div>
+					<div class="card border-info mb-3">
+						<div class="body">
+							<div class="container pt-3 pb-3">
+								<%= render "comments/form" %>
+							</div>
+						</div>
+					</div>
 			</div>
 		</div>
-
-		<!-- Comentarios -->
-		<div class="cook col-12 col-sm-12 col-md-4 col-lg-4">
-				<div id="comments-box">
-					<h4 class="pt-2 font-2">Comentarios</h4>
-					<% @cook.comments.last(8).map do |comment| %>
-					<div class="card">
-						<div class="card-body">
-							<p class="font-2"><%= comment.content[0,30] %></p>
-							<p class="comment-rating font-1" data-score="<%= comment.rating %>"><%= comment.user.name %> - </p>
-						</div>
-					</div>
-					<% end %>
-				</div>
-				<div class="card border-info mb-3">
-					<div class="body">
-						<div class="container pt-3 pb-3">
-							<%= render "comments/form" %>
-						</div>
-					</div>
-				</div>
-		</div>
-	</div>
-</section>
+  </div>
