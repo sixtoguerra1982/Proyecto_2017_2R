@@ -15,10 +15,12 @@
     </div>
 
     <% if user_signed_in? %>
-     <div class="d-flex flex-row justify-content-center">
-       <a id="order_price" class="btn btn-outline-default text-white border-white mr-2">
-         Total: <%= number_to_currency(@total, separator: ',', delimiter: '.', precision: 0) %>
-       </a>
+    <div class="d-flex flex-row justify-content-center mr-3">
+      <a id="order_price" class="btn btn-outline-default text-white border-white mr-2">
+        Total: <%= number_to_currency(@total, separator: ',', delimiter: '.', precision: 0) %>
+      </a>
+    </div>
+     <div class="d-flex flex-row justify-content-center row">
        <a class="btn btn-outline-success text-white border-white mr-2 font-1" href="<%= orders_path %>">Carro de compra</a>
        <a href="<%= destroy_user_session_path %>" data-method="DELETE"
          class="btn btn-outline-primary text-white border-white mr-2 font-1">Salir</a>
