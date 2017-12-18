@@ -50,15 +50,21 @@ h6.font-2{
 	height: 38px;
 }
 
-.score{
-	margin: 30px;
-	position: fixed;
-	background-color: white;
-	border: 3px solid #555;
-	z-index: 1000;
-}
-
 .jumbotron-img{
 	background: url("jumbotron-01.jpg");
 	background-size: cover;
+}
+
+.score{
+	margin: 30px;
+	padding: -30px;
+	position: fixed;
+	z-index: 1000;
+}
+
+#order_price{
+	color: gold;
+	background-color: black;
+  text-align: center;
+	margin: 0 auto;
 }

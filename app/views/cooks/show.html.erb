@@ -18,6 +18,17 @@
 						<p class="font-2"><%= @cook.biography[0,350] %></p>
 					</div>
 				</div>
+				<!--  carro de compra-->
+				<% if user_signed_in? %>
+					<div class="row">
+						<div class="offset-md-8 col-md-4">
+							<div class="score">
+								<p id="order_price"><%= number_to_currency(@total, separator: ',', delimiter: '.', precision: 0) %></p>
+								<%= link_to "Carro de Compra", orders_path, class: "btn btn-success" %>
+							</div>
+						</div>
+					</div>
+				<% end %>
 			</div>
 	</div>
 
