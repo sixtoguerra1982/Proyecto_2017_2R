@@ -64,7 +64,7 @@
         </div>
       <% end %>
       <div class="offset-sm-1 col-sm-3">
-        <%= link_to 'Confirmar compra', to_buy_orders_path, class: 'btn btn-outline-success'  %>
+        <%= link_to 'Confirmar compra', '#', id:'find-address', class: 'btn btn-outline-success'  %>
       </div>
     </div>
   <% else %>
@@ -80,3 +80,38 @@
     </div>
   <% end %>
 </section>
+
+<!--  SCRIPT GEOCODER -->
+
+<script>
+    $("#find-address").click(function(event) {
+      $(this).html('<i class="fa fa-spinner fa-spin"></i>');
+      event.preventDefault();
+      if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(getAddress);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this Browser.";
+      }
+    });
+
+    function getAddress(position){
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      $.ajax({
+        url: '/geocoder/findaddress',
+        type: 'GET',
+        dataType: 'script',
+        data: {latitude: latitude, longitude: longitude}
+      })
+      .done(function() {
+        console.log("success");
+      })
+      .fail(function() {
+        console.log("error");
+      })
+      .always(function() {
+        console.log("Completed");
+        $("#find-address").html('Confirmar compra');
+      });
+    }
+</script>
