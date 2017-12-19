@@ -1,3 +1,8 @@
+document.addEventListener('turbolinks:before-cache', function(){
+    $('#rating-form').raty('destroy');
+    $('.comment-rating').raty('destroy');
+});
+
 document.addEventListener('turbolinks:load', function(){
     $('#rating-form').raty({
       path: '/assets/',
