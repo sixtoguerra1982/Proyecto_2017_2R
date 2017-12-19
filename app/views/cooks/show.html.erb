@@ -73,7 +73,7 @@
 			<div class="cook col-12 col-sm-12 col-md-4 col-lg-4">
 					<div id="comments-box">
 						<h4 class="pt-2 font-2">Comentarios</h4>
-						<% @cook.comments.last(8).map do |comment| %>
+						<% @cook.comments.last(8).each do |comment| %>
 						<div class="card">
 							<div class="card-body">
 								<p class="font-2"><%= comment.content[0,30] %></p>
