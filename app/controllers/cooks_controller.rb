@@ -8,6 +8,7 @@ class CooksController < ApplicationController
   def show
     @menus = @cook.menus.where("menus.date = ? and menus.stock > 0", Date.today).order(:name)
     @comment = Comment.new
+    @cook_comment = @cook.comments
     # suma de ordenes
     if user_signed_in?
       @orders = current_user.orders.where("date = ?", Date.today)
