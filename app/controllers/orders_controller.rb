@@ -54,6 +54,16 @@ class OrdersController < ApplicationController
   end
 
   def to_buy
+
+
+    @ubicacion = HeaderOrder.find_by(user_id: current_user,
+                date: Date.today, payed: false)
+
+    unless @ubicacion.nil?
+      @ubicacion = @ubicacion.payment_address
+    end
+
+
     @total = @orders.pluck("price * quantity").sum()
   end
 

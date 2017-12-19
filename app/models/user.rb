@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :cooks
   has_many :orders, dependent: :destroy
+  has_many :header_orders, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   has_many :menus, through: :cooks
