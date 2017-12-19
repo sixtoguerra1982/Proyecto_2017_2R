@@ -42,8 +42,14 @@
       <div class="row">
         <div class="col-md-12">
           <div class="field">
-            <%= form.label :date, "Fecha de Venta" %><br>
-            <%= form.date_select :date, id: :menu_date %>
+
+            <% if Rails.env.development? %>
+              <%= form.label :date, "Fecha de Venta" %><br>
+              <%= form.date_select :date, id: :menu_date %>
+            <% else %>
+              <%= form.label :date, "Fecha de Venta", hidden: false %><br>
+              <%= form.date_select :date, id: :menu_date, hidden: false %>
+            <% end %>
           </div>
         </div>
       </div>

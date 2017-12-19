@@ -9,7 +9,7 @@ class User < ApplicationRecord
   mount_uploader :picture, AvatarUploader
 
   has_many :cooks
-  has_many :orders
+  has_many :orders, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   has_many :menus, through: :cooks

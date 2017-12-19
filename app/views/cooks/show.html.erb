@@ -38,7 +38,7 @@
 			<div class="menus col-12 col-sm-12 col-md-8 col-lg-8">
 				<div class="row">
 					<% @menus.each do |menu|  %>
-						<% if menu.stock > 1 %>
+						<% if menu.stock >= 1 %>
 							<div class="col-12 col-sm-12 col-md-6 col-lg-4">
 									<div class="card mt-3">
 										<%= image_tag menu.picture.thumb, class: 'card-img-top img-fluid' %>
