@@ -12,8 +12,9 @@
 //
 
 
-//= require jquery3
+//= require jquery/dist/jquery
 //= require popper
+//= require bootstrap-sprockets
 //= require raty-js/lib/jquery.raty
 //= require tether/dist/js/tether.js
 //= require moment/moment.js
