@@ -15,6 +15,8 @@ gem 'carrierwave', '~> 1.0'
 gem 'faker'
 # Bootstrap 4 beta
 gem 'bootstrap', '~> 4.0.0.beta2.1'
+#jqueryrails
+gem 'jquery-rails'
 # Devise
 gem 'devise'
 # Omniauth Facebook
